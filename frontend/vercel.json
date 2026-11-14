@@ -1,8 +1,8 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/api/:match*", "destination": "https://YOUR_BACKEND_URL.onrender.com/api/:match*" },
-    { "source": "/assets/config.js", "destination": "https://YOUR_BACKEND_URL.onrender.com/assets/config.js" },
+    { "source": "/api/:match*", "destination": "https://solmira.onrender.com/api/:match*" },
+    { "source": "/assets/config.js", "destination": "https://solmira.onrender.com/assets/config.js" },
     { "source": "/login/student", "destination": "/login-student.html" },
     { "source": "/login/poster", "destination": "/login-poster.html" },
     { "source": "/login/mentor", "destination": "/login-mentor.html" },

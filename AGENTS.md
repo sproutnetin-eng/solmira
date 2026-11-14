@@ -15,23 +15,26 @@ npm install        # dependencies (no build step)
 
 ## Project structure
 ```
-server/
-  server.js                  entry: gzip, static client/ (/assets cached 1h), 60s cache on GET /api/public/*, API mounts
+backend/
+  server.js                  entry: gzip, static frontend/ (/assets cached 1h), 60s cache on GET /api/public/*, API mounts
   supabase.js                getAdmin() (service role) + getUserClient(token)
   middleware/auth.js         authRequired / optionalAuth / loadProfile / requireRole
   middleware/upload.js       multer memory storage (replaces req.formData())
   lib/ + lib/workspace/     ported utilities, same export names as original TS lib
-  routes/                    13 routers with full /api/... paths:
+  routes/                    14 routers with full /api/... paths:
                              problems, enrollments, submissions, teams, workspaces,
                              mentors, blogs, auth, admin, misc,
-                             public-reads, student-reads, staff-reads
-client/
+                             public-reads, student-reads, staff-reads, payments
+  api/                       api entrypoint
+  scripts/                   tsx utilities: seed mentors/test data, run migrations
+  supabase/migrations/       raw SQL (apply manually in Supabase dashboard)
+  payments/                  payment docs & test env
+  package.json               backend package configuration
+frontend/
   *.html                     43 pages (clean URLs mapped in server.js)
   assets/app.js              Supabase browser client, api() helper (Bearer token),
                              requireAuth/requireRole guards, nav
   assets/styles.css          shared theme (.card .btn .input .table .badge .alert)
-supabase/migrations/         raw SQL (apply manually in Supabase dashboard)
-scripts/                     tsx utilities: seed mentors/test data, run migrations
 ```
 
 ## Key non-obvious patterns

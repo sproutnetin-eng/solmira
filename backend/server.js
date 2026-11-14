@@ -1,10 +1,14 @@
 require('dotenv').config();
 const path = require('path');
+const fs = require('fs');
 // Locally, prefer the current .env file so restarting after a Test/Live key
 // change never leaves the server using stale terminal environment variables.
 // Production deployments keep their platform-provided environment variables.
+const envPath = fs.existsSync(path.join(__dirname, '.env'))
+  ? path.join(__dirname, '.env')
+  : path.join(__dirname, '..', '.env');
 require('dotenv').config({
-  path: path.join(__dirname, '..', '.env'),
+  path: envPath,
   override: process.env.NODE_ENV !== 'production',
 });
 const express = require('express');
@@ -14,7 +18,7 @@ const { cacheGet } = require('./middleware/cache');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const CLIENT = path.join(__dirname, '..', 'client');
+const CLIENT = path.join(__dirname, '..', 'frontend');
 
 app.use(cors());
 app.use(compression());

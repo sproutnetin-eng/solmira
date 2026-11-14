@@ -12,7 +12,7 @@ Plain **Node.js + Express** REST API with a vanilla HTML/CSS/JS frontend. No fra
 |-------|------------|
 | Runtime | Node.js 20+ |
 | Server | Express 4 |
-| Frontend | Vanilla HTML/CSS/JS (static files in `client/`) |
+| Frontend | Vanilla HTML/CSS/JS (static files in `frontend/`) |
 | Backend / DB | Supabase (PostgreSQL, Auth, Storage) |
 | Uploads | multer (memory) → Supabase Storage |
 | Email | Nodemailer (SMTP) |
@@ -30,21 +30,23 @@ Required env vars (see `.env`): `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABAS
 ## Project structure
 
 ```
-server/
+backend/
   server.js              entry: page routes, static files, API mounts
   supabase.js            getAdmin() (service role) + getUserClient(token)
   middleware/auth.js     authRequired / optionalAuth / loadProfile / requireRole (Bearer JWT)
   middleware/upload.js   multer memory storage
   lib/                   ported utilities (same export names as the original TS lib)
-  routes/                13 routers with full /api/... paths (problems, enrollments,
+  routes/                14 routers with full /api/... paths (problems, enrollments,
                          submissions, teams, workspaces, mentors, blogs, auth, admin,
-                         misc, public-reads, student-reads, staff-reads)
-client/
+                         misc, public-reads, student-reads, staff-reads, payments)
+  api/                   API entrypoint
+  supabase/migrations/   raw SQL — apply manually in the Supabase SQL editor
+  scripts/               tsx utilities (seed mentors/test data, run migrations, buckets)
+  payments/              payment docs & test mode configs
+frontend/
   *.html                 43 pages, clean URLs (e.g. /problems/:id -> problem-detail.html)
   assets/app.js          Supabase browser client, api() helper, auth guards, nav
   assets/styles.css      shared theme
-supabase/migrations/     raw SQL — apply manually in the Supabase SQL editor
-scripts/                 tsx utilities (seed mentors/test data, run migrations, buckets)
 ```
 
 ## Auth model

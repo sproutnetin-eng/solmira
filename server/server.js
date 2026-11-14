@@ -1,5 +1,12 @@
 require('dotenv').config();
 const path = require('path');
+// Locally, prefer the current .env file so restarting after a Test/Live key
+// change never leaves the server using stale terminal environment variables.
+// Production deployments keep their platform-provided environment variables.
+require('dotenv').config({
+  path: path.join(__dirname, '..', '.env'),
+  override: process.env.NODE_ENV !== 'production',
+});
 const express = require('express');
 const cors = require('cors');
 const compression = require('compression');
@@ -11,7 +18,10 @@ const CLIENT = path.join(__dirname, '..', 'client');
 
 app.use(cors());
 app.use(compression());
-app.use(express.json({ limit: '2mb' }));
+app.use(express.json({
+  limit: '2mb',
+  verify: (req, _res, buf) => { req.rawBody = buf; },
+}));
 app.use(express.urlencoded({ extended: true }));
 
 // Runtime config for the vanilla frontend (Supabase URL + anon key).
@@ -32,6 +42,8 @@ const pages = {
   '/login/mentor': 'login-mentor.html',
   '/login/admin': 'login-admin.html',
   '/join': 'join.html',
+  '/join/verify': 'verify-otp.html',
+  '/verify-otp': 'verify-otp.html',
   '/forgot-password': 'forgot-password.html',
   '/problems': 'problems.html',
   '/problems/:id/submit': 'submit.html',
@@ -39,6 +51,7 @@ const pages = {
   '/problems/:id': 'problem-detail.html',
   '/solutions': 'solutions.html',
   '/solutions/:id': 'solution-detail.html',
+  '/checkout/:submissionId': 'checkout.html',
   '/blogs/new': 'blog-new.html',
   '/blogs/manage': 'blog-manage.html',
   '/blogs/:id': 'blog-detail.html',
@@ -70,6 +83,7 @@ const pages = {
   '/admin/problems': 'admin-problems.html',
   '/admin/solutions': 'admin-solutions.html',
   '/admin': 'admin.html',
+  '/admin/payouts': 'admin-payouts.html',
 };
 for (const [route, file] of Object.entries(pages)) {
   app.get(route, (req, res) => res.sendFile(path.join(CLIENT, file)));
@@ -102,6 +116,7 @@ const routers = [
   './routes/misc',
   './routes/public-reads',
   './routes/student-reads',
+  './routes/payments',
   './routes/staff-reads',
 ];
 for (const r of routers) {
@@ -119,4 +134,8 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal server error' });
 });
 
-app.listen(PORT, () => console.log(`SproutNet Node server on http://localhost:${PORT}`));
+if (require.main === module) {
+  app.listen(PORT, () => console.log(`Solmira Node server on http://localhost:${PORT}`));
+}
+
+module.exports = app;

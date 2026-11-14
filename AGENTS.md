@@ -1,4 +1,4 @@
-# SproutNet — Agent Guide
+# Solmira — Agent Guide
 
 ## Quick start
 ```bash

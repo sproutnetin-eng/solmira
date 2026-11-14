@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Solmira</title>
+<link rel="stylesheet" href="/assets/styles.css?v=solmira-ui">
+<style>
+  .co-wrap { max-width: 720px; margin: 0 auto; padding: clamp(32px, 6vw, 52px) clamp(16px, 4vw, 24px); }
+  .co-crumb { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #2D6A4F; margin-bottom: 10px; }
+  .co-head h1 { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(28px, 6vw, 38px); font-weight: 400; color: #1C1410; letter-spacing: -0.5px; margin: 0 0 8px; }
+  .co-head p { font-size: 15px; color: #4A3F38; font-weight: 300; margin: 0 0 24px; }
+  .co-card { background: #fff; border: 1.5px solid rgba(28,20,16,0.07); border-radius: 14px; overflow: hidden; }
+  .co-sec { padding: 20px 22px; border-bottom: 1px solid rgba(28,20,16,0.07); }
+  .co-sec:last-child { border-bottom: none; }
+  .co-cap { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #2D6A4F; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+  .co-order { display: flex; gap: 14px; align-items: flex-start; }
+  .co-thumb { width: 46px; height: 46px; border-radius: 10px; background: #EAF4EE; display: flex; align-items: center; justify-content: center; color: #2D6A4F; flex-shrink: 0; }
+  .co-title { font-family: Sora, sans-serif; font-size: 16px; font-weight: 600; color: #1C1410; margin-bottom: 4px; }
+  .co-meta { font-size: 13px; color: #6A5F58; line-height: 1.6; }
+  .co-meta b { color: #1C1410; font-weight: 600; }
+  .co-amount-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .co-amount-input { display: inline-flex; align-items: center; gap: 8px; background: #FAF8F4; border: 1.5px solid rgba(28,20,16,0.14); border-radius: 12px; padding: 8px 16px; }
+  .co-amount-input:focus-within { border-color: #2D6A4F; }
+  .co-rupee { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(30px, 7vw, 42px); color: #1C1410; line-height: 1; }
+  .co-amount-input input { width: 7ch; border: none; background: transparent; outline: none; font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(30px, 7vw, 42px); color: #1C1410; line-height: 1.1; padding: 0; -moz-appearance: textfield; appearance: textfield; }
+  .co-amount-input input::-webkit-outer-spin-button, .co-amount-input input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .co-hint { font-size: 12px; color: #9CA3A0; }
+  .co-split { margin-top: 16px; display: grid; gap: 8px; }
+  .co-split .line { display: flex; justify-content: space-between; font-size: 13px; color: #4A3F38; }
+  .co-split .line b { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #1C1410; font-weight: 600; }
+  .co-split .line.total { border-top: 1px dashed rgba(28,20,16,0.15); padding-top: 8px; margin-top: 2px; }
+  .co-split .line.total b { color: #2D6A4F; }
+  .co-secure { display: flex; gap: 8px; align-items: center; font-size: 12px; color: #6A5F58; margin-top: 14px; }
+  .co-actions { padding: 20px 22px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; background: #FFFDF8; }
+  .co-pay { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: #fff; background: #2D6A4F; border: none; border-radius: 10px; padding: 14px 26px; cursor: pointer; flex: 1 1 240px; text-align: center; }
+  .co-pay:hover { background: #245c43; }
+  .co-pay:disabled { cursor: not-allowed; opacity: 0.65; }
+  .co-back { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; color: #6A5F58; background: none; border: none; cursor: pointer; text-decoration: none; padding: 10px 4px; }
+  .co-back:hover { color: #1C1410; }
+  .co-note { font-size: 12px; color: #9CA3A0; width: 100%; }
+
+  /* Receipt */
+  .co-ok { text-align: center; padding: 34px 22px 24px; }
+  .co-check { width: 64px; height: 64px; border-radius: 50%; background: rgba(21,128,61,0.1); border: 2px solid rgba(21,128,61,0.35); color: #15803d; font-size: 30px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+  .co-ok h2 { font-family: Sora, sans-serif; font-size: 22px; font-weight: 600; color: #1C1410; margin: 0 0 6px; }
+  .co-ok .sub { font-size: 14px; color: #6A5F58; margin-bottom: 18px; }
+  .co-paid { font-family: 'Instrument Serif', Georgia, serif; font-size: 40px; color: #2D6A4F; line-height: 1; margin-bottom: 4px; }
+  .co-inv { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #92400e; background: rgba(244,167,35,0.14); border: 1px solid rgba(244,167,35,0.35); border-radius: 999px; padding: 4px 12px; margin-top: 10px; }
+  .co-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; padding: 0 22px 8px; }
+  .co-detail { background: #FAF8F4; border: 1px solid rgba(28,20,16,0.07); border-radius: 10px; padding: 12px 14px; }
+  .co-detail .k { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #9CA3A0; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
+  .co-detail .v { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #1C1410; overflow-wrap: anywhere; }
+  .co-dl { font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; color: #fff; background: #2D6A4F; border: none; border-radius: 10px; padding: 13px 22px; cursor: pointer; }
+  .co-dl:hover { background: #245c43; }
+  .co-dl:disabled { cursor: not-allowed; opacity: 0.65; }
+  .co-pending { background: rgba(244,167,35,0.08); border: 1px solid rgba(244,167,35,0.35); color: #92400e; font-size: 13px; border-radius: 10px; padding: 12px 14px; margin: 0 22px 18px; }
+
+  /* Error / loading */
+  .co-error { text-align: center; padding: 48px 24px; }
+  .co-error .big { font-size: 40px; margin-bottom: 12px; }
+  .co-error .t { font-family: Sora, sans-serif; font-size: 17px; font-weight: 600; color: #1C1410; margin-bottom: 6px; }
+  .co-error .d { font-size: 14px; color: #6A5F58; margin-bottom: 18px; }
+</style>
+</head>
+<body>
+<div id="sn-nav"></div>
+<main class="co-wrap">
+  <div id="msg"></div>
+  <div id="card" aria-live="polite">
+    <div class="co-card"><div class="co-sec"><div class="sk sk-line" style="width:40%;margin-bottom:10px"></div><div class="sk sk-line" style="width:75%;margin-bottom:10px"></div><div class="sk sk-line" style="width:55%"></div></div></div>
+  </div>
+</main>
+<script src="/assets/config.js"></script>
+<script type="module">
+import { api, requireRole, renderNav, esc, alertBox } from '/assets/app.js';
+import { icon } from '/assets/icons.js';
+import { payForSubmission, rupees } from '/assets/payments.js?v=20261113-amt-inv';
+import { downloadInvoiceFromButton, invoiceNumber } from '/assets/invoice.js?v=20261113-amt-inv';
+
+renderNav();
+const me = await requireRole('poster', 'admin');
+const msg = document.getElementById('msg');
+const card = document.getElementById('card');
+
+const submissionId = decodeURIComponent(location.pathname.split('/').filter(Boolean).pop() || '');
+const qAmount = Number(new URLSearchParams(location.search).get('amount'));
+
+let data = null;        // checkout summary payload
+let amountPaise = 0;    // amount the poster entered (paise)
+let state = 'loading';  // loading | error | summary | processing | receipt | pending
+let errorMsg = '';
+let receiptPayment = null;
+
+const feePct = () => Number(data?.fee_percent ?? 0);
+const feePaise = () => Math.round((amountPaise * feePct()) / 100);
+const netPaise = () => amountPaise - feePaise();
+
+function splitFromRupees(rupeeAmount) {
+  const paise = Math.round(Number(rupeeAmount) * 100);
+  return paise;
+}
+
+// Live-update the fee split + pay button after the amount input changes
+// (targeted DOM updates so the input keeps focus).
+function updateSummaryAmounts() {
+  const sub = document.getElementById('co-sub');
+  if (!sub) return;
+  sub.textContent = rupees(amountPaise);
+  document.getElementById('co-fee').textContent = `− ${rupees(feePaise())}`;
+  document.getElementById('co-net').textContent = rupees(netPaise());
+  const pay = document.getElementById('co-paybtn');
+  pay.textContent = `Pay ${rupees(amountPaise)} with Razorpay`;
+  pay.disabled = amountPaise < 100;
+  const hint = document.getElementById('co-hint');
+  if (hint) hint.textContent = amountPaise >= 100 ? 'Editable — set the reward amount here' : 'Enter at least ₹1';
+}
+
+function goBack() {
+  location.href = '/poster/solutions';
+}
+
+function renderError(title, detail) {
+  card.innerHTML = `<div class="co-card co-error">
+    <div class="big">${icon('alert', 40) || '!'}</div>
+    <div class="t">${esc(title)}</div>
+    <div class="d">${esc(detail || '')}</div>
+    <button type="button" class="co-back" data-nav="back">← Back to student solutions</button>
+  </div>`;
+}
+
+function summaryHtml() {
+  const p = data.problem || {};
+  const solver = data.solver?.name || 'the solver';
+  const poster = data.poster?.name || 'you';
+  return `
+  <div class="co-head">
+    <div class="co-crumb">Poster solutions / Checkout</div>
+    <h1>Review your payment</h1>
+    <p>Set the amount below, then continue to Razorpay to fund the reward.</p>
+  </div>
+  <div class="co-card">
+    <div class="co-sec">
+      <div class="co-cap">Order summary</div>
+      <div class="co-order">
+        <div class="co-thumb">${icon('filetext', 22)}</div>
+        <div>
+          <div class="co-title">${esc(p.title || 'Problem')}</div>
+          <div class="co-meta">
+            Solution by <b>${esc(solver)}</b><br>
+            Reward for an <b>approved</b> solution · billed to <b>${esc(poster)}</b>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="co-sec">
+      <div class="co-cap">Amount to pay</div>
+      <div class="co-amount-row">
+        <label class="co-amount-input" for="co-amt">
+          <span class="co-rupee">₹</span>
+          <input id="co-amt" type="number" min="1" step="1" inputmode="decimal" placeholder="0" aria-label="Amount to pay in rupees" value="${amountPaise >= 100 ? amountPaise / 100 : ''}">
+        </label>
+        <div class="co-hint" id="co-hint">${amountPaise >= 100 ? 'Editable — set the reward amount here' : 'Enter at least ₹1'}</div>
+      </div>
+      <div class="co-split">
+        <div class="line"><span>Subtotal</span><b id="co-sub">${rupees(amountPaise)}</b></div>
+        <div class="line"><span>Platform fee (${feePct()}%)</span><b id="co-fee">− ${rupees(feePaise())}</b></div>
+        <div class="line total"><span>${esc(solver)}'s share · released by admin</span><b id="co-net">${rupees(netPaise())}</b></div>
+      </div>
+      <div class="co-secure">${icon('shield', 14)} Payments are processed securely by Razorpay. Card, UPI, netbanking and wallets accepted. Funds settle to Solmira's account.</div>
+    </div>
+    <div class="co-actions">
+      <button type="button" class="co-pay" id="co-paybtn" data-act="pay"${amountPaise < 100 ? ' disabled' : ''}>Pay ${rupees(amountPaise)} with Razorpay</button>
+      <button type="button" class="co-back" data-nav="back">← Back to solutions</button>
+      <div class="co-note">You will complete the payment in Razorpay's secure window, then return here for your invoice.</div>
+    </div>
+  </div>`;
+}
+
+function receiptHtml() {
+  const pay = receiptPayment || {};
+  const paid = pay.status === 'paid';
+  const inv = invoiceNumber(pay);
+  return `
+  <div class="co-head">
+    <div class="co-crumb">Poster solutions / Checkout</div>
+    <h1>${paid ? 'Payment complete' : 'Payment pending'}</h1>
+    <p>${paid ? 'Solmira has received the reward — the admin will release it to the solver. Your invoice is ready to download.' : 'We are confirming the payment with Razorpay. It will be reconciled automatically.'}</p>
+  </div>
+  <div class="co-card">
+    <div class="co-ok">
+      <div class="co-check">${paid ? '✓' : '…'}</div>
+      <h2>${paid ? 'Thank you!' : 'Confirming your payment'}</h2>
+      <div class="sub">${esc(data?.problem?.title || 'Solution reward')} · ${esc(data?.solver?.name || 'Solver')}</div>
+      <div class="co-paid">${rupees(pay.amount_paise || amountPaise)}</div>
+      <div class="co-inv">${esc(inv)}</div>
+    </div>
+    ${paid ? '' : `<div class="co-pending">Payment is still being confirmed. You can safely close this page — the status updates on its own.</div>`}
+    <div class="co-details">
+      <div class="co-detail"><div class="k">Status</div><div class="v">${esc(String(pay.status || 'created').toUpperCase())}</div></div>
+      <div class="co-detail"><div class="k">Payment ID</div><div class="v">${esc(pay.razorpay_payment_id || '—')}</div></div>
+      <div class="co-detail"><div class="k">Order ID</div><div class="v">${esc(pay.razorpay_order_id || '—')}</div></div>
+      <div class="co-detail"><div class="k">Paid on</div><div class="v">${pay.paid_at ? esc(new Date(pay.paid_at).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })) : '—'}</div></div>
+    </div>
+    <div class="co-actions" style="justify-content:center">
+      ${paid ? `<button type="button" class="co-dl" data-act="invoice">⬇ Download Invoice (PDF)</button>` : ''}
+      <button type="button" class="co-back" data-nav="back">Back to student solutions</button>
+    </div>
+  </div>`;
+}
+
+function render() {
+  if (state === 'loading') return; // skeleton already in the DOM
+  if (state === 'error') return renderError(errorMsg, '');
+  if (state === 'receipt' || state === 'pending') { card.innerHTML = receiptHtml(); return; }
+  card.innerHTML = summaryHtml();
+}
+
+function fail(e) {
+  state = 'error';
+  errorMsg = e?.message || 'Something went wrong.';
+  render();
+}
+
+async function load() {
+  if (!submissionId) { state = 'error'; errorMsg = 'Missing submission id.'; return render(); }
+  try {
+    data = await api(`/api/payments/checkout/${encodeURIComponent(submissionId)}`);
+    const existing = data.payment;
+    if (existing?.status === 'paid') {
+      // Already settled — show the receipt straight away.
+      receiptPayment = existing;
+      amountPaise = Number(receiptPayment.amount_paise || 0);
+      state = 'receipt';
+      return render();
+    }
+    if (data.problem_paid) {
+      state = 'error';
+      errorMsg = "This problem's reward has already been paid.";
+      return render();
+    }
+    const reward = Number(data.problem?.reward_amount || 0);
+    const openAmt = existing?.status === 'created' ? Number(existing.amount_paise || 0) / 100 : 0;
+    // Prefill: explicit ?amount= link > the open (created) payment > the reward.
+    const requested = Number.isFinite(qAmount) && qAmount >= 1
+      ? qAmount
+      : (openAmt >= 1 ? openAmt : reward);
+    amountPaise = requested >= 1 ? splitFromRupees(requested) : 0;
+    state = 'summary';
+    render();
+  } catch (e) { fail(e); }
+}
+
+async function startPayment(btn) {
+  if (amountPaise < 100) {
+    msg.innerHTML = alertBox('Enter an amount of at least ₹1.');
+    return;
+  }
+  state = 'processing';
+  msg.innerHTML = '';
+  btn.disabled = true;
+  btn.textContent = 'Opening Razorpay…';
+  try {
+    const result = await payForSubmission(submissionId, {
+      amount: amountPaise / 100,
+      prefill: { name: me?.profile?.name || '', email: me?.profile?.email || '' },
+      onFailure: (m) => { msg.innerHTML = alertBox(m); },
+    });
+    // Re-read the settled payment row for the invoice details.
+    data = await api(`/api/payments/checkout/${encodeURIComponent(submissionId)}`);
+    receiptPayment = data.payment;
+    if (result?.pending || receiptPayment?.status !== 'paid') {
+      state = 'pending';
+      render();
+      return;
+    }
+    state = 'receipt';
+    render();
+  } catch (err) {
+    if (err?.message === 'Payment window closed') {
+      state = 'summary';
+      render();
+      return;
+    }
+    msg.innerHTML = alertBox(err?.message || 'Payment failed.');
+    state = 'summary';
+    render();
+  }
+}
+
+card.addEventListener('input', (e) => {
+  if (e.target.id !== 'co-amt' || state !== 'summary') return;
+  const v = Number(e.target.value);
+  amountPaise = Number.isFinite(v) && v >= 1 ? Math.round(v * 100) : 0;
+  updateSummaryAmounts();
+});
+
+card.addEventListener('click', async (e) => {
+  const nav = e.target.closest('[data-nav="back"]');
+  if (nav) return goBack();
+  const btn = e.target.closest('[data-act="pay"]');
+  if (btn && state === 'summary') return startPayment(btn);
+  const inv = e.target.closest('[data-act="invoice"]');
+  if (inv && receiptPayment) {
+    try {
+      await downloadInvoiceFromButton(inv, receiptPayment, {
+        problemTitle: data?.problem?.title,
+        posterName: data?.poster?.name,
+        solverName: data?.solver?.name,
+        feePercent: data?.fee_percent,
+      });
+    } catch (err) { msg.innerHTML = alertBox(err?.message || 'Could not build the PDF.'); }
+  }
+});
+
+if (me) await load();
+</script>
+</body>
+</html>

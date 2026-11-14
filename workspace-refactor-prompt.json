@@ -1,6 +1,6 @@
 {
   "phase": "Workspace Foundation — Phase 1",
-  "title": "Implement Workspace-First Architecture for SproutNet",
+  "title": "Implement Workspace-First Architecture for Solmira",
   "objective": "Refactor the existing collaboration model so that Workspace becomes the central entity for all collaboration features instead of Team. The current codebase already has workspaces, teams, conversations, messages, mentor_assignments, activity_logs, notifications, and workspace_files tables via the v2 migration. Now we need to extend this foundation into a full Workspace-first architecture.",
   "codebaseAnalysis": {
     "alreadyImplemented": {

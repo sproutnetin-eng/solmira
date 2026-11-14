@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mentors | SproutNet</title>
+<title>Mentors | Solmira</title>
 <link rel="stylesheet" href="/assets/styles.css">
 <style>
-  .mt-page { min-height: 100vh; background: #FAF8F4; font-family: 'DM Sans', sans-serif; }
+  .mt-page { min-height: 100vh; background: #FAF8F4; font-family: 'Manrope', sans-serif; }
   .mt-wrap { max-width: 1100px; margin: 0 auto; padding: clamp(32px, 6vw, 52px) clamp(16px, 4vw, 24px); }
   .mt-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #2D6A4F; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
   .mt-title { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(30px, 5vw, 40px); font-weight: 400; color: #1C1410; margin: 0 0 8px; }
   .mt-sub { font-size: 15px; color: #4A3F38; max-width: 600px; margin: 0 0 36px; }
   .mt-head-block { margin-bottom: 36px; }
   .mt-filters { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; align-items: center; }
-  .mt-search { flex: 1 1 260px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: #1C1410; background: #fff; border: 1.5px solid rgba(28,20,16,0.12); border-radius: 10px; padding: 10px 14px; outline: none; min-width: 0; }
-  .mt-select { font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 10px 12px; border: 1.5px solid rgba(28,20,16,0.12); border-radius: 10px; background: #fff; color: #1C1410; }
+  .mt-search { flex: 1 1 260px; font-family: 'Manrope', sans-serif; font-size: 14px; color: #1C1410; background: #fff; border: 1.5px solid rgba(28,20,16,0.12); border-radius: 10px; padding: 10px 14px; outline: none; min-width: 0; }
+  .mt-select { font-family: 'Manrope', sans-serif; font-size: 13px; padding: 10px 12px; border: 1.5px solid rgba(28,20,16,0.12); border-radius: 10px; background: #fff; color: #1C1410; }
   .mt-check { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #4A3F38; cursor: pointer; }
   .mt-check input { accent-color: #2D6A4F; }
   .mt-count { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9CA3A0; margin-bottom: 20px; }
@@ -23,7 +23,7 @@
   .mt-card.available { border: 1.5px solid rgba(45,106,79,0.15); }
   .mt-card.other { border: 1.5px solid rgba(28,20,16,0.07); }
   .mt-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
-  .mt-name { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; color: #1C1410; }
+  .mt-name { font-family: 'Manrope', sans-serif; font-size: 18px; font-weight: 700; color: #1C1410; }
   .mt-exp { font-size: 13px; color: #4A3F38; margin-top: 2px; }
   .mt-status { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 3px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.08em; }
   .mt-status.available { background: rgba(34,197,94,0.1); color: #16A34A; }
@@ -41,9 +41,9 @@
   .mt-link.li { color: #2563EB; }
   .mt-link.gh { color: #1C1410; }
   .mt-spacer { flex: 1; }
-  .mt-connect { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #8B5CF6; background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.2); border-radius: 8px; padding: 8px 14px; cursor: pointer; }
-  .mt-connected { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #2D6A4F; background: #EAF4EE; border: 1px solid rgba(45,106,79,0.2); border-radius: 8px; padding: 8px 14px; display: inline-flex; align-items: center; gap: 4px; }
-  .mt-pending { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #D97706; background: rgba(244,167,35,0.1); border: 1px solid rgba(244,167,35,0.2); border-radius: 8px; padding: 8px 14px; display: inline-flex; align-items: center; gap: 4px; }
+  .mt-connect { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; color: #8B5CF6; background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.2); border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+  .mt-connected { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; color: #2D6A4F; background: #EAF4EE; border: 1px solid rgba(45,106,79,0.2); border-radius: 8px; padding: 8px 14px; display: inline-flex; align-items: center; gap: 4px; }
+  .mt-pending { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; color: #D97706; background: rgba(244,167,35,0.1); border: 1px solid rgba(244,167,35,0.2); border-radius: 8px; padding: 8px 14px; display: inline-flex; align-items: center; gap: 4px; }
   .mt-mentor-note { font-size: 11px; color: #9CA3A0; }
   .mt-nomatch { text-align: center; padding: 48px 0; color: #9CA3A0; }
   .mt-empty-wrap { max-width: 900px; margin: 0 auto; padding: clamp(48px, 8vw, 80px) clamp(16px, 4vw, 24px); text-align: center; }
@@ -53,11 +53,11 @@
   .mt-empty-btn { display: inline-block; margin-top: 20px; font-size: 14px; font-weight: 600; color: #1C1410; background: #F4A723; padding: 12px 24px; border-radius: 8px; text-decoration: none; }
   .mt-modal-bg { position: fixed; inset: 0; background: rgba(28,20,16,0.4); backdrop-filter: blur(3px); display: flex; align-items: center; justify-content: center; z-index: 1000; }
   .mt-modal { width: min(480px, 92vw); background: #fff; border-radius: 16px; padding: 28px; border: 1.5px solid rgba(28,20,16,0.08); }
-  .mt-modal h2 { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; color: #1C1410; margin: 0 0 8px; }
+  .mt-modal h2 { font-family: 'Manrope', sans-serif; font-size: 20px; font-weight: 700; color: #1C1410; margin: 0 0 8px; }
   .mt-modal p { font-size: 14px; color: #4A3F38; margin: 0 0 20px; }
   .mt-field { display: flex; flex-direction: column; gap: 6px; }
   .mt-field label { font-size: 13px; font-weight: 500; color: #1C1410; }
-  .mt-field textarea { font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 10px; border: 1.5px solid rgba(28,20,16,0.12); border-radius: 8px; }
+  .mt-field textarea { font-family: 'Manrope', sans-serif; font-size: 14px; padding: 10px; border: 1.5px solid rgba(28,20,16,0.12); border-radius: 8px; }
   .mt-modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px; }
   .mt-cancel { padding: 9px 16px; background: #fff; border: 1px solid rgba(28,20,16,0.12); border-radius: 8px; cursor: pointer; }
   .mt-send { padding: 9px 18px; background: #8B5CF6; border: none; border-radius: 8px; font-weight: 600; color: #fff; cursor: pointer; }
@@ -157,7 +157,7 @@ function openModal(mentorId) {
     <div class="mt-field"><label>Message (optional)</label>
     <textarea id="c-msg" rows="3" placeholder="Introduce yourself and explain what you'd like guidance on..."></textarea></div>
     <div class="mt-modal-actions"><button type="button" class="mt-cancel" id="c-cancel">Cancel</button>
-    <button type="submit" class="mt-send" id="c-send">Send Request →</button></div></form></div></div>`;
+    <button type="submit" class="mt-send" id="c-send"><span>Send Request</span> ${icon('arrowRight', 14)}</button></div></form></div></div>`;
   document.getElementById('c-cancel').addEventListener('click', () => { document.getElementById('modal').innerHTML = ''; });
   document.getElementById('c-form').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -169,7 +169,7 @@ function openModal(mentorId) {
       document.getElementById('c-ok').innerHTML = `<div class="mt-ok">Connection request sent! The mentor will be notified.</div>`;
       ctx.pendingMentorIds.push(mentorId);
       setTimeout(() => { document.getElementById('modal').innerHTML = ''; render(); }, 1800);
-    } catch (err) { document.getElementById('c-err').innerHTML = `<div class="mt-err">${esc(err.message)}</div>`; btn.disabled = false; btn.textContent = 'Send Request →'; }
+    } catch (err) { document.getElementById('c-err').innerHTML = `<div class="mt-err">${esc(err.message)}</div>`; btn.disabled = false; btn.innerHTML = `<span>Send Request</span> ${icon('arrowRight', 14)}`; }
   });
 }
 

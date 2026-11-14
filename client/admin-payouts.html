@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payouts | Solmira Admin</title>
+<link rel="stylesheet" href="/assets/styles.css">
+<style>
+  .wrap { max-width:1100px; margin:0 auto; padding:42px 20px; } .head { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; align-items:end; margin-bottom:24px; }
+  h1 { margin:0; font-family:'Sora',sans-serif; font-size:30px; } .sub { color:#6A5F58; margin:7px 0 0; } .summary { display:grid; grid-template-columns:repeat(3,minmax(150px,1fr)); gap:12px; margin-bottom:24px; }
+  .metric,.row { background:#fff; border:1px solid rgba(28,20,16,.1); border-radius:12px; padding:16px; } .metric b { display:block; font-family:'JetBrains Mono',monospace; font-size:22px; margin-bottom:4px; } .metric span,.small { color:#6A5F58; font-size:13px; }
+  .toolbar { display:flex; gap:10px; align-items:center; margin-bottom:14px; } select,input { padding:9px 10px; border:1px solid #d7d0c9; border-radius:8px; font:inherit; } .list { display:grid; gap:10px; }
+  .row { display:grid; grid-template-columns:1.5fr 1fr 1fr auto; gap:14px; align-items:center; } .amount { font-family:'JetBrains Mono',monospace; font-weight:700; } .pending { color:#a16207; } .paid { color:#15803d; }
+  button { border:0; border-radius:8px; padding:9px 12px; font-weight:700; cursor:pointer; background:#2D6A4F; color:#fff; } button:disabled { opacity:.6; cursor:not-allowed; } .empty { text-align:center; color:#6A5F58; padding:36px; }
+  @media (max-width:700px) { .summary { grid-template-columns:1fr; } .row { grid-template-columns:1fr; gap:8px; } }
+</style>
+</head>
+<body>
+<div id="sn-nav"></div>
+<main class="wrap"><div class="head"><div><h1>Payout management</h1><p class="sub">Poster payments settle in Solmira's account. Send each solver's share yourself, then record the UTR here.</p></div></div><div id="message"></div><section class="summary" id="summary"></section><div class="toolbar"><label>Status <select id="status"><option value="pending">Pending</option><option value="failed">Failed</option><option value="all">All</option></select></label><button id="refresh" type="button">Refresh</button></div><section class="list" id="list"><div class="empty">Loading payouts…</div></section></main>
+<script src="/assets/config.js"></script>
+<script type="module">
+import { api, esc, requireRole, renderNav, alertBox } from '/assets/app.js';
+renderNav();
+const message = document.getElementById('message'); const list = document.getElementById('list');
+const money = (paise) => `₹${(Number(paise || 0) / 100).toLocaleString('en-IN', { maximumFractionDigits: 2 })}`;
+async function load() {
+  list.innerHTML = '<div class="empty">Loading payouts…</div>';
+  try {
+    const [summary, data] = await Promise.all([api('/api/admin/payments/summary'), api(`/api/admin/payouts?status=${encodeURIComponent(document.getElementById('status').value)}`)]);
+    document.getElementById('summary').innerHTML = `<div class="metric"><b>${esc(String(summary.payments_count))}</b><span>Payments collected</span></div><div class="metric"><b>${money(summary.platform_fee_paise)}</b><span>Platform fees</span></div><div class="metric"><b>${money(summary.owed_to_solvers_paise)}</b><span>Rewards funded</span></div>`;
+    list.innerHTML = data.payouts.length ? data.payouts.map((p) => `<article class="row"><div><strong>${esc(p.recipient_name)}</strong><div class="small">${esc(p.payments?.problems?.title || 'Problem reward')}</div></div><div><span class="amount">${money(p.amount_paise)}</span><div class="small ${esc(p.status)}">${esc(p.status)}</div></div><div class="small">${p.account ? `${esc(p.account.account_holder_name)}<br>${esc(p.account.upi_id)}` : 'No UPI details saved'}</div><div>${p.status !== 'paid' && p.status !== 'cancelled' ? `<button data-pay="${esc(p.id)}" type="button">Mark paid</button>` : (p.utr ? `<span class="small">UTR: ${esc(p.utr)}</span>` : '')}</div></article>`).join('') : '<div class="empty">No payouts match this filter.</div>';
+  } catch (error) { list.innerHTML = ''; message.innerHTML = alertBox(error.message); }
+}
+list.addEventListener('click', async (event) => { const button = event.target.closest('[data-pay]'); if (!button) return; const utr = prompt('Enter the bank / UPI reference (UTR) for this transfer:'); if (!utr) return; button.disabled = true; try { await api('/api/admin/payouts/mark-paid', { method:'POST', body:{ payout_id:button.dataset.pay, utr } }); message.innerHTML = alertBox('Payout marked as paid.', true); load(); } catch (error) { button.disabled = false; message.innerHTML = alertBox(error.message); } });
+document.getElementById('status').addEventListener('change', load); document.getElementById('refresh').addEventListener('click', load);
+if (await requireRole('admin')) load();
+</script>
+</body>
+</html>

@@ -1,8 +1,8 @@
-# SproutNet — Product Requirements Document
+# Solmira — Product Requirements Document
 
 ## 1. Product Overview
 
-**SproutNet** is a structured innovation platform designed for Indian college students to identify, collaborate on, and solve real-world problems. It connects **students**, **problem posters**, and **mentors** in a unified workspace-driven ecosystem.
+**Solmira** is a structured innovation platform designed for Indian college students to identify, collaborate on, and solve real-world problems. It connects **students**, **problem posters**, and **mentors** in a unified workspace-driven ecosystem.
 
 **Tagline:** *"Structured Thinking for Real India"*
 
@@ -46,7 +46,7 @@
 - Uploads tracked in `submissions` table per milestone
 
 ### 4.4 Teams
-- Create team with invite code (`SPROUT-XXXXXX`), auto-creates workspace + "general" channel
+- Create team with invite code (`SOLMIRA-XXXXXX`), auto-creates workspace + "general" channel
 - Join by invite code, auto-added to workspace channel
 - Leader can transfer leadership; members can leave (leader cannot)
 - Min/max team size configurable per problem; team mode optional
@@ -132,7 +132,7 @@ Each team gets a workspace with:
 | `/leaderboard` | Public leaderboard |
 | `/impact` | Impact showcase |
 | `/how-it-works` | Platform explanation |
-| `/about` | About SproutNet |
+| `/about` | About Solmira |
 | `/mentors` | Browse mentors directory |
 
 ---
@@ -309,7 +309,7 @@ Each team gets a workspace with:
 - **Enrollment auto-completion** when all milestones submitted (`syncCompletedEnrollments`).
 - **Mentor capacity limit** enforced via `max_active_teams` before assignment/acceptance.
 - **Workspace progress auto-calculated** from milestone completion ratio.
-- **Team invite codes** format: `SPROUT-XXXXXX`.
+- **Team invite codes** format: `SOLMIRA-XXXXXX`.
 - **Workspace leader cannot leave**; must transfer leadership first.
 - **Blog local fallback** enabled by default; blogs served from `.data/blogs.json` when Supabase tables missing.
 - **Thumbnail fallback:** base64 encoding in `rejected_reason` column if `thumbnail_url` column missing.

@@ -3,47 +3,125 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SproutNet — Real problems, structured solutions</title>
+<title>Solmira — Real problems, structured solutions</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/styles.css">
 <style>
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--soil:#1C1410;--green:#2D6A4F;--green-light:#3D8A65;--green-pale:#EAF4EE;--marigold:#F4A723;--marigold-lt:#F9C05A;--marigold-dim:rgba(244,167,35,0.12);--paper:#FAF8F4;--paper-dim:#F2EEE8;--dust:#9CA3A0;--ink:#1C1410;--ink-mid:#4A3F38;--white:#ffffff;--ff-display:'Instrument Serif',Georgia,serif;--ff-head:'Sora',sans-serif;--ff-body:'DM Sans',sans-serif;--ff-mono:'JetBrains Mono',monospace;--r-sm:6px;--r-md:12px;--r-pill:999px;--sh:0 2px 12px rgba(28,20,16,.08);--sh-md:0 4px 24px rgba(28,20,16,.12);--ease:200ms ease-out}
+:root{
+  --ivory:#FAF8F4;
+  --charcoal:#181816;
+  --charcoal-muted:#524E48;
+  --charcoal-light:#8E8A83;
+  --forest:#1E352F;
+  --forest-dark:#14221D;
+  --forest-light:#2E6557;
+  --sage:#DCE7DD;
+  --sage-soft:#E8F1EC;
+  --amber:#F4A723;
+  --amber-hover:#F6B53E;
+  --border-editorial:#E8E2D8;
+  --ff-display:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;
+  --ff-sans:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;
+  --ff-mono:'JetBrains Mono',monospace;
+  --soil:#14221D;
+  --green:#244E43;
+  --green-light:#2E6557;
+  --green-pale:#E8F1EC;
+  --marigold:#F4A723;
+  --marigold-lt:#F6B53E;
+  --marigold-dim:rgba(244,167,35,0.14);
+  --paper:#FAF8F4;
+  --paper-dim:#F4EFE8;
+  --dust:#8E8A83;
+  --ink:#181816;
+  --ink-mid:#524E48;
+  --white:#ffffff;
+  --ff-head:'Manrope',sans-serif;
+  --ff-body:'Manrope',sans-serif;
+  --r-sm:6px;
+  --r-md:12px;
+  --r-pill:999px;
+  --sh:0 2px 12px rgba(24,24,22,.06);
+  --sh-md:0 4px 24px rgba(24,24,22,.10);
+  --ease:200ms cubic-bezier(0.16,1,0.3,1)
+}
 html{scroll-behavior:smooth}
-body{font-family:var(--ff-body);background:var(--paper);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
-body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4}
+body{font-family:var(--ff-sans);background:var(--ivory);color:var(--charcoal);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.35}
 
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 52px 72px;text-align:center;position:relative;overflow:hidden;background-color:var(--paper);background-image:url('/assets/hero-bg.png');background-repeat:no-repeat;background-position:center bottom;background-size:cover}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(255,255,255,0.7) 0%,rgba(255,255,255,0.3) 45%,transparent 75%);pointer-events:none;z-index:1}
-.hero::after{display:none}
-.hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%;max-width:1280px;transform:translateY(-52px)}
-@keyframes fu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-.a0{opacity:0;animation:fu .6s ease-out .08s forwards}
-.a1{opacity:0;animation:fu .7s ease-out .20s forwards}
-.a2{opacity:0;animation:fu .7s ease-out .34s forwards}
-.a3{opacity:0;animation:fu .7s ease-out .46s forwards}
-.a4{opacity:0;animation:fu .7s ease-out .60s forwards}
-.a5{opacity:0;animation:fu .7s ease-out .78s forwards}
-.hero .hero-h1, .hero-h1{font-family:var(--ff-display);font-size:clamp(68px,8.5vw,112px);font-weight:400;line-height:1.02;color:var(--ink);letter-spacing:-2px;max-width:960px;margin-bottom:28px}
-.hero-h1 em{font-style:italic;color:var(--green)}
-.hero-ctas{display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:28px}
-.btn-hp{font-family:var(--ff-body);font-size:16px;font-weight:600;color:var(--soil);background:var(--marigold);text-decoration:none;padding:14px 32px;border-radius:var(--r-sm);display:flex;align-items:center;gap:8px;box-shadow:0 2px 10px rgba(244,167,35,.3);transition:all var(--ease)}
-.btn-hp:hover{background:var(--marigold-lt);transform:translateY(-2px);box-shadow:0 6px 22px rgba(244,167,35,.4)}
-.btn-hs{font-family:var(--ff-body);font-size:16px;font-weight:500;color:var(--ink-mid);text-decoration:none;padding:14px 30px;border-radius:var(--r-sm);border:1.5px solid rgba(28,20,16,.15);background:transparent;transition:all var(--ease)}
-.btn-hs:hover{border-color:rgba(28,20,16,.3);color:var(--ink);transform:translateY(-1px)}
-.poster-bar{display:flex;align-items:center;gap:24px;justify-content:space-between;padding:28px 36px;background:rgba(234,244,238,0.85);backdrop-filter:blur(8px);border:1px solid rgba(45,106,79,.22);border-radius:10px;margin-bottom:28px;width:100%;max-width:860px;box-shadow:0 2px 8px rgba(28,20,16,.04)}
-.poster-bar-left{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left}
-.poster-bar-label{font-family:var(--ff-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);font-weight:600}
-.poster-bar-text{font-family:var(--ff-body);font-size:16px;color:var(--ink-mid);line-height:1.45}
-.poster-bar-text strong{color:var(--ink);font-weight:600}
-.btn-post{font-family:var(--ff-body);font-size:16px;font-weight:600;color:#fff;background:var(--green);border:none;text-decoration:none;padding:14px 26px;border-radius:6px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;box-shadow:0 1px 6px rgba(45,106,79,.22);transition:all var(--ease);flex-shrink:0}
-.btn-post:hover{background:var(--green-light);transform:translateY(-1px);box-shadow:0 4px 14px rgba(45,106,79,.3)}
-.hero-scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;z-index:2}
-.scroll-line{width:1px;height:38px;background:linear-gradient(to bottom,var(--marigold),transparent);animation:sa 2.2s ease-in-out infinite}
-@keyframes sa{0%,100%{opacity:.35;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.15)}}
+/* Cinematic Dusk Dunes Nav */
+#sn-nav{position:absolute;top:0;left:0;right:0;min-height:72px;padding:24px clamp(20px,4vw,48px) 0;max-width:1200px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;background:transparent !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;border-bottom:none !important;z-index:100;box-shadow:none !important}
+#sn-nav .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+#sn-nav .brand span{font-family:var(--ff-sans);font-weight:700;font-size:clamp(22px,2.4vw,26px);letter-spacing:-0.03em;color:#ffffff !important}
+#sn-nav .brand svg rect{fill:rgba(255,255,255,0.12) !important;stroke:rgba(255,255,255,0.25) !important}
+#sn-nav .sn-nav-links{display:flex;align-items:center;gap:24px}
+#sn-nav .sn-nav-links a.navlink{font-family:var(--ff-sans);font-size:14px;font-weight:400;color:rgba(255,255,255,0.78) !important;text-decoration:none;transition:color .15s ease}
+#sn-nav .sn-nav-links a.navlink:hover{color:#ffffff !important}
+#sn-nav .sn-pill.amber, #sn-nav .sn-pill.sn-pill-outline{background:rgba(255,255,255,0.06) !important;color:#ffffff !important;border:1px solid rgba(255,255,255,0.3) !important;border-radius:4px !important;font-family:var(--ff-sans);font-weight:500;font-size:13.5px;padding:8px 18px !important;text-decoration:none;display:inline-flex;align-items:center;gap:4px;box-shadow:none !important;transition:all .2s cubic-bezier(0.16,1,0.3,1)}
+#sn-nav .sn-pill.amber:hover, #sn-nav .sn-pill.sn-pill-outline:hover{background:rgba(255,255,255,0.16) !important;border-color:rgba(255,255,255,0.6) !important;color:#ffffff !important;transform:translateY(-1px)}
+
+/* Cinematic Neoclassical Campus Hero Section */
+.hero{min-height:max(840px,100vh);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:90px 24px 270px;text-align:center;position:relative;overflow:hidden;background-color:#1e352f;background-image:linear-gradient(180deg, rgba(14, 28, 24, 0.78) 0%, rgba(18, 36, 31, 0.65) 35%, rgba(22, 44, 38, 0.32) 60%, transparent 80%), image-set(url('/assets/images/solmira-neoclassical-campus-mist.webp') type("image/webp"), url('/assets/images/solmira-neoclassical-campus-mist.png') type("image/png")), url('/assets/images/solmira-neoclassical-campus-mist.png');background-repeat:no-repeat;background-position:center bottom;background-size:cover}
+.hero-inner{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;width:100%;max-width:960px;margin:auto auto}
+
+@keyframes heroFadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.a1{opacity:0;animation:heroFadeUp .75s cubic-bezier(0.16,1,0.3,1) .10s forwards}
+.a2{opacity:0;animation:heroFadeUp .75s cubic-bezier(0.16,1,0.3,1) .22s forwards}
+.a3{opacity:0;animation:heroFadeUp .75s cubic-bezier(0.16,1,0.3,1) .34s forwards}
+
+.hero .hero-h1,.hero-h1{font-family:var(--ff-sans);font-size:clamp(44px,5.8vw,72px);font-weight:500;line-height:1.12;letter-spacing:-0.03em;color:#ffffff;max-width:920px;margin:0 auto 34px;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,0.45)}
+.hero-h1 .accent{color:#F4A723;font-style:normal}
+.hero-desc{display:none}
+
+.hero-ctas{display:flex;align-items:center;justify-content:center;gap:16px}
+.btn-hero-primary{font-family:var(--ff-sans);font-size:15px;font-weight:600;color:#181816;background:#F4A723;text-decoration:none;padding:13px 28px;border-radius:4px;border:1px solid rgba(0,0,0,0.12);display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 18px rgba(0,0,0,0.3),0 2px 6px rgba(244,167,35,0.25);transition:all .2s cubic-bezier(0.16,1,0.3,1);cursor:pointer}
+.btn-hero-primary:hover{background:#f6b53e;transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,0.4);color:#181816}
+.btn-hero-dark{font-family:var(--ff-sans);font-size:14.5px;font-weight:500;color:#ffffff;background:#1c242c;text-decoration:none;padding:12px 26px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(0,0,0,0.25);transition:all .2s cubic-bezier(0.16,1,0.3,1);cursor:pointer}
+.btn-hero-dark:hover{background:#25303a;border-color:rgba(255,255,255,0.25);transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,0.35);color:#ffffff}
+.btn-arrow{display:inline-block;transition:transform .2s ease}
+.btn-hero-primary:hover .btn-arrow, .btn-hero-dark:hover .btn-arrow{transform:translateX(4px)}
+
+@media(prefers-reduced-motion:reduce){
+  .a1,.a2,.a3{opacity:1 !important;animation:none !important;transform:none !important}
+  .btn-hero-dark,.btn-arrow{transition:none !important;transform:none !important}
+}
+
+@media(max-width:1024px){
+  section{padding:72px 24px}
+  .what-grid{grid-template-columns:1fr}
+  .hiw-grid{grid-template-columns:repeat(2,1fr);gap:32px}
+  .hiw-grid::before{display:none}
+  .th-inner{grid-template-columns:1fr;gap:48px}
+  .stats-bar{padding:24px}
+  .si-stat{padding:0 24px}
+  .reality,.thinking,.closing{padding:72px 24px}
+  footer{padding:40px 24px}
+  .ft-inner{flex-direction:column;align-items:flex-start}
+  .hero{min-height:760px;padding:32px 20px 140px}
+  .hero .hero-h1,.hero-h1{font-size:clamp(38px,5.2vw,58px);margin-bottom:18px}
+  .hero-desc{font-size:16px;margin-bottom:28px}
+}
+
+@media(max-width:680px){
+  #sn-nav{min-height:60px;padding:16px 16px 0}
+  #sn-nav .brand span{font-size:20px}
+  #sn-nav .sn-nav-links{gap:14px}
+  #sn-nav .sn-nav-links a.navlink:not(:last-child):not([href="/login"]){display:none}
+  #sn-nav .sn-pill.amber, #sn-nav .sn-pill.sn-pill-outline{padding:7px 14px !important;font-size:13px}
+  .hero{min-height:680px;padding:24px 16px 100px}
+  .hero .hero-h1,.hero-h1{font-size:clamp(34px,8.5vw,44px);letter-spacing:-0.025em;line-height:1.15;margin-bottom:16px}
+  .hero-desc{font-size:15px;line-height:1.55;margin-bottom:24px;padding:0 4px}
+  .hero-ctas{width:100%}
+  .btn-hero-dark{width:100%;justify-content:center;padding:12px 20px;font-size:14.5px}
+  .hiw-grid{grid-template-columns:1fr}
+  .stats-bar{flex-direction:column;gap:22px}
+  .si-stat::after{display:none}
+}
 .stats-bar{background:var(--soil);padding:30px 52px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap}
 .si-stat{display:flex;flex-direction:column;align-items:center;padding:0 52px;position:relative}
 .si-stat:not(:last-child)::after{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:30px;background:rgba(250,248,244,.09)}
@@ -116,8 +194,8 @@ section{padding:100px 52px}
 .cl-title{font-family:var(--ff-display);font-size:clamp(36px,5vw,64px);color:var(--paper);font-weight:400;line-height:1.08;letter-spacing:-.5px;margin-bottom:20px}
 .cl-title em{font-style:italic;color:var(--marigold)}
 .cl-sub{font-family:var(--ff-body);font-size:17px;color:rgba(250,248,244,.65);line-height:1.65;font-weight:300;max-width:460px;margin:0 auto 40px}
-.btn-cl{font-family:var(--ff-body);font-size:16px;font-weight:600;color:var(--green);background:var(--marigold);text-decoration:none;padding:16px 38px;border-radius:var(--r-sm);display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 22px rgba(0,0,0,.16);transition:all var(--ease)}
-.btn-cl:hover{background:var(--marigold-lt);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.22)}
+.btn-cl{font-family:var(--ff-body);font-size:16px;font-weight:600;color:#181816;background:var(--amber);text-decoration:none;padding:16px 38px;border-radius:var(--r-sm);display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 22px rgba(0,0,0,.2);transition:all var(--ease)}
+.btn-cl:hover{background:var(--amber-hover);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.28);color:#181816}
 .cl-fine{margin-top:22px;font-family:var(--ff-body);font-size:12px;color:rgba(250,248,244,.32)}
 footer{background:var(--soil);padding:52px}
 .ft-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px}
@@ -130,10 +208,7 @@ footer{background:var(--soil);padding:52px}
 .rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease-out,transform .6s ease-out}
 .rv.on{opacity:1;transform:translateY(0)}
 .rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
-@media(max-width:1024px){section{padding:72px 24px}.what-grid{grid-template-columns:1fr}.hiw-grid{grid-template-columns:repeat(2,1fr);gap:32px}.hiw-grid::before{display:none}.th-inner{grid-template-columns:1fr;gap:48px}.stats-bar{padding:24px}.si-stat{padding:0 24px}.hero{padding:96px 24px 72px}.reality,.thinking,.closing{padding:72px 24px}footer{padding:40px 24px}.ft-inner{flex-direction:column;align-items:flex-start}}
 
-@media(max-width:640px){.hiw-grid{grid-template-columns:1fr}.hero{min-height:100vh;min-height:100svh;min-height:100dvh;padding:84px 20px 44px;justify-content:center}.hero-inner{transform:none}.hero .hero-h1,.hero-h1{font-size:clamp(44px,13.5vw,58px);letter-spacing:-1px;line-height:1.05;margin-bottom:20px}.hero-ctas{flex-direction:column;width:100%;gap:10px;margin-bottom:20px}.btn-hp,.btn-hs{width:100%;justify-content:center;padding:11px 18px;font-size:14px}.stats-bar{flex-direction:column;gap:22px}.si-stat::after{display:none}.poster-bar{flex-direction:column;align-items:flex-start;padding:20px;gap:14px;margin-bottom:0}.poster-bar-text{font-size:14px}.btn-post{width:100%;justify-content:center;padding:12px 18px;font-size:14px}.hero-scroll{display:none}}
-      
 .logo-svg{width:34px;height:34px;flex-shrink:0}
 footer{text-align:left}
 .lp-msg{max-width:1200px;margin:0 auto;padding:24px 52px 0}
@@ -144,25 +219,16 @@ footer{text-align:left}
 </head>
 <body>
 <!-- Static nav shell: paints instantly on refresh/open, upgraded by renderNav() once auth resolves. -->
-<div id="sn-nav"><a class="brand" href="/"><svg width="34" height="34" viewBox="0 0 34 34" fill="none"><rect width="34" height="34" rx="8" fill="#2D6A4F"/><line x1="17" y1="27" x2="17" y2="15" stroke="#FAF8F4" stroke-width="1.7" stroke-linecap="round"/><path d="M17 21 C16 19 13 18 11 14.5 C11 14.5 15.5 13 17 17.5" fill="#F4A723"/><path d="M17 18 C18 15.5 21.5 14 24 10.5 C24 10.5 19.5 10 17 14.5" fill="rgba(250,248,244,0.88)"/></svg><span>SproutNet</span></a><nav class="sn-nav-links"><a class="navlink" href="/login">Sign In</a><a class="sn-pill amber" style="padding:8px 20px;border-radius:6px;font-weight:600" href="/join">Join →</a></nav></div>
+<div id="sn-nav"><a class="brand" href="/"><span>Solmira</span></a><nav class="sn-nav-links"><a class="navlink" href="/#about">Overview</a><a class="navlink" href="/problems">Discover</a><a class="navlink" href="/#how-it-works">How It Works</a><a class="navlink" href="/login">Sign In</a><a class="sn-pill sn-pill-outline" href="/join"><span>Explore Briefs</span> <svg class="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></nav></div>
 <div id="msg" class="lp-msg"></div>
 
-<section class="hero">
+<section class="hero" id="hero">
   <div class="hero-inner">
-    <h1 class="hero-h1 a1">India's problems<br>don't wait for <em>permission.</em></h1>
-    <div class="hero-ctas a3">
-      <a href="/login/student" class="btn-hp">Start Solving →</a>
-      <a href="/problems" class="btn-hs">See Open Problems</a>
-    </div>
-    <div class="poster-bar a3">
-      <div class="poster-bar-left">
-        <span class="poster-bar-label">For organisations &amp; NGOs</span>
-        <span class="poster-bar-text"><strong>Have a real problem to solve?</strong> Post your challenge, get structured solutions from India's sharpest students.</span>
-      </div>
-      <a href="/login/poster" class="btn-post">Post a Problem →</a>
+    <h1 class="hero-h1 a1">India has problems.<br>We find the <span class="accent">opportunities.</span></h1>
+    <div class="hero-ctas a2">
+      <a href="/problems" class="btn-hp btn-hero-primary"><span>Explore Problem Briefs</span> <svg class="arrow-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
     </div>
   </div>
-  <div class="hero-scroll a5"><div class="scroll-line"></div></div>
 </section>
 
 <div class="stats-bar">
@@ -174,7 +240,7 @@ footer{text-align:left}
 
 <div class="reality">
   <div class="r-inner">
-    <div class="r-item"><div class="r-num">01</div><div class="r-text">Exams test memory. SproutNet tests <em>judgment.</em></div></div>
+    <div class="r-item"><div class="r-num">01</div><div class="r-text">Exams test memory. Solmira tests <em>judgment.</em></div></div>
     <div class="r-item"><div class="r-num">02</div><div class="r-text">Assignments have right answers. <em>Real problems don't.</em></div></div>
     <div class="r-item"><div class="r-num">03</div><div class="r-text">You've been trained to study India. Now <em>help fix it.</em></div></div>
   </div>
@@ -183,7 +249,7 @@ footer{text-align:left}
 <section id="about">
   <div class="si-wrap">
     <h2 class="s-title rv d1">Not another hackathon.</h2>
-    <p class="s-sub rv d2">Three things make SproutNet different from every competition you've seen.</p>
+    <p class="s-sub rv d2">Three things make Solmira different from every competition you've seen.</p>
     <div class="what-grid">
       <div class="wc rv d1"><div class="wc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:-3px" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="wc-title">Real Problems</div><div class="wc-body">Posted by real people with real context — not toy scenarios invented for a weekend.</div></div>
       <div class="wc rv d2"><div class="wc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:-3px" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg></div><div class="wc-title">Structured Thinking</div><div class="wc-body">A 7-field framework that forces you to think like a professional — from root cause to implementation plan.</div></div>
@@ -201,7 +267,7 @@ footer{text-align:left}
       <div class="hiw-step rv d3"><div class="step-dot"><div class="step-n">03</div></div><div class="step-t">Get evaluated fairly</div><div class="step-d">Blind review. 5 clear criteria. No favouritism.</div></div>
       <div class="hiw-step rv d3"><div class="step-dot"><div class="step-n">04</div></div><div class="step-t">See your thinking matter</div><div class="step-d">Your rank, your badges, your Builder Score.</div></div>
     </div>
-    <a href="/problems" class="hiw-cta rv">See open problems →</a>
+    <a href="/problems" class="hiw-cta rv"><span>See open problems</span> <svg class="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
   </div>
 </section>
 
@@ -231,7 +297,7 @@ footer{text-align:left}
       <div class="wc" aria-hidden="true"><div class="sk sk-line" style="width:35%;margin-bottom:12px"></div><div class="sk" style="height:20px;width:80%;margin-bottom:10px"></div><div class="sk sk-line" style="width:100%"></div><div class="sk sk-line" style="width:70%"></div></div>
       <div class="wc" aria-hidden="true"><div class="sk sk-line" style="width:45%;margin-bottom:12px"></div><div class="sk" style="height:20px;width:90%;margin-bottom:10px"></div><div class="sk sk-line" style="width:95%"></div><div class="sk sk-line" style="width:65%"></div></div>
     </div>
-    <a href="/problems" class="hiw-cta rv">See all problems →</a>
+    <a href="/problems" class="hiw-cta rv"><span>See all problems</span> <svg class="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
   </div>
 </section>
 
@@ -262,7 +328,7 @@ footer{text-align:left}
   <div class="cl-inner">
     <h2 class="cl-title">You don't need experience.<br>You need <em>curiosity.</em></h2>
     <p class="cl-sub">No prior experience required. No branch restrictions. The only requirement is that you take it seriously.</p>
-    <a href="/join" class="btn-cl">Create Your Account →</a>
+    <a href="/join" class="btn-cl"><span>Create Your Account</span> <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
     <p class="cl-fine">Verified student identities only · Season 1 now open</p>
   </div>
 </div>
@@ -277,7 +343,7 @@ footer{text-align:left}
           <path d="M17 21 C16 19 13 18 11 14.5 C11 14.5 15.5 13 17 17.5" fill="#F4A723"/>
           <path d="M17 18 C18 15.5 21.5 14 24 10.5 C24 10.5 19.5 10 17 14.5" fill="rgba(250,248,244,0.6)"/>
         </svg>
-        <span class="ft-wm">SproutNet</span>
+        <span class="ft-wm">Solmira</span>
       </div>
     </div>
     <div class="ft-links">
@@ -286,7 +352,7 @@ footer{text-align:left}
       <a href="/leaderboard">Leaderboard</a>
       <a href="/login">Sign in</a>
     </div>
-    <div class="ft-copy">© 2026 SproutNet</div>
+    <div class="ft-copy">© 2026 Solmira</div>
   </div>
 </footer>
 

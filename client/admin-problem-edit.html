@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Edit Problem — SproutNet Admin</title>
+<title>Edit Problem — Solmira Admin</title>
 <link rel="stylesheet" href="/assets/styles.css">
 <style>
   .admin-theme { --bg-main: #F6F7F8; --bg-surface: #FFFFFF; --bg-card: #FFFFFF; --bg-hover: #F0F2F4; --border-primary: #E5E7EB; --border-secondary: #D1D5DB; --border-input: #D1D5DB; --text-primary: #000000; --text-secondary: #000000; --text-muted: #000000; --text-disabled: #000000; --accent-primary: #10A37F; --accent-hover: #1DBF93; --danger: #EF4444; --warning: #F59E0B; background: var(--bg-main); color: var(--text-primary); }
   .admin-theme * { box-sizing: border-box; color: #000000 !important; }
   .admin-theme ::placeholder { color: #000000 !important; opacity: 0.55; }
-  .admin-shell { min-height: 100vh; background: var(--bg-main); color: var(--text-primary); font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; --admin-columns: 260px 1fr; --admin-aside-position: sticky; --admin-aside-height: 100vh; }
+  .admin-shell { min-height: 100vh; background: var(--bg-main); color: var(--text-primary); font-family: 'Manrope', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; --admin-columns: 260px 1fr; --admin-aside-position: sticky; --admin-aside-height: 100vh; }
   .admin-grid { display: grid; grid-template-columns: var(--admin-columns, 260px 1fr); min-height: 100vh; }
   .admin-sidebar { border-right: 1px solid var(--border-primary); background: var(--bg-surface); padding: clamp(16px, 3vw, 22px) clamp(14px, 3vw, 18px); position: var(--admin-aside-position, sticky); top: 0; height: var(--admin-aside-height, 100vh); overflow-y: auto; }
   .admin-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 18px; }
@@ -23,16 +23,16 @@
   .admin-sidebar-link { text-decoration: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; border-radius: 12px; background: var(--bg-surface); border: 1px solid var(--border-primary); }
   .admin-sidebar-link--active { background: var(--bg-hover); border-color: var(--border-secondary); box-shadow: inset 3px 0 0 var(--accent-primary); }
   .admin-links { display: grid; gap: 8px; }
-  .admin-links .t { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 800; }
+  .admin-links .t { font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 800; }
   .admin-links .m { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
   .admin-tools { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-primary); display: grid; gap: 6px; }
   .admin-tools .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-  .admin-tools button { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; background: transparent; border: 1px solid var(--border-primary); border-radius: 8px; padding: 8px 12px; cursor: pointer; text-align: left; }
+  .admin-tools button { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; background: transparent; border: 1px solid var(--border-primary); border-radius: 8px; padding: 8px 12px; cursor: pointer; text-align: left; }
   .admin-tools button:disabled { cursor: not-allowed; opacity: 0.6; }
   .admin-tools .tmsg { font-size: 11px; font-family: 'JetBrains Mono', monospace; line-height: 1.4; }
   .admin-back { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(148,163,184,0.12); }
   .admin-back a { justify-content: center; }
-  .admin-btn { font-family: "DM Sans", sans-serif; font-size: 12px; font-weight: 800; border-radius: 12px; padding: 8px 10px; cursor: pointer; border: 1px solid var(--border-secondary); background: var(--bg-surface); }
+  .admin-btn { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 800; border-radius: 12px; padding: 8px 10px; cursor: pointer; border: 1px solid var(--border-secondary); background: var(--bg-surface); }
   .admin-head { min-height: 64px; padding: 10px clamp(16px, 3vw, 26px); display: flex; align-items: center; justify-content: flex-end; border-bottom: 1px solid var(--border-primary); background: rgba(246,247,248,0.9); position: sticky; top: 0; z-index: 50; }
   .admin-main { padding: clamp(20px, 3vw, 28px) clamp(16px, 3vw, 26px) 70px; }
   .ae-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; }
@@ -40,25 +40,25 @@
   .ae-title { font-family: Sora, sans-serif; font-size: clamp(20px, 4vw, 26px); font-weight: 950; letter-spacing: -0.5px; margin: 0 0 8px; }
   .ae-sub { font-size: 14px; font-weight: 500; margin: 0; }
   .ae-nav { display: flex; gap: 10px; align-items: center; }
-  .ae-nav a { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 900; text-decoration: none; border: 1px solid rgba(148,163,184,0.18); border-radius: 12px; padding: 9px 12px; background: rgba(148,163,184,0.08); }
+  .ae-nav a { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 900; text-decoration: none; border: 1px solid rgba(148,163,184,0.18); border-radius: 12px; padding: 9px 12px; background: rgba(148,163,184,0.08); }
   .ae-box { background: var(--bg-surface); border: 1px solid var(--border-primary); border-radius: 18px; padding: 18px; }
   .ae-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
   .ae-pills { display: flex; gap: 8px; flex-wrap: wrap; }
   .ae-pill { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 4px 10px; border-radius: 999px; }
   .ae-pill.st { background: rgba(16,163,127,0.12); border: 1px solid rgba(16,163,127,0.28); }
   .ae-pill.id { background: rgba(148,163,184,0.08); border: 1px solid rgba(148,163,184,0.14); }
-  .ae-cancel { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 900; text-decoration: none; border: 1px solid rgba(148,163,184,0.18); border-radius: 12px; padding: 9px 12px; background: rgba(148,163,184,0.08); }
+  .ae-cancel { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 900; text-decoration: none; border: 1px solid rgba(148,163,184,0.18); border-radius: 12px; padding: 9px 12px; background: rgba(148,163,184,0.08); }
   .ae-form { display: flex; flex-direction: column; gap: 18px; }
-  .ae-err { background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.2); border-radius: 8px; padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 13px; }
-  .ae-ok { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); border-radius: 8px; padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 13px; }
+  .ae-err { background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.2); border-radius: 8px; padding: 10px 14px; font-family: 'Manrope', sans-serif; font-size: 13px; }
+  .ae-ok { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); border-radius: 8px; padding: 10px 14px; font-family: 'Manrope', sans-serif; font-size: 13px; }
   .ae-field { display: flex; flex-direction: column; gap: 6px; }
-  .ae-field > span { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 800; }
-  .ae-input { font-family: 'DM Sans', sans-serif; font-size: 14px; background: #1A1A1A; border: 1px solid var(--border-input); border-radius: 10px; padding: 11px 12px; outline: none; width: 100%; box-sizing: border-box; }
-  .ae-textarea { font-family: 'DM Sans', sans-serif; font-size: 14px; background: #1A1A1A; border: 1px solid var(--border-input); border-radius: 10px; padding: 11px 12px; outline: none; width: 100%; box-sizing: border-box; resize: vertical; }
+  .ae-field > span { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 800; }
+  .ae-input { font-family: 'Manrope', sans-serif; font-size: 14px; background: #1A1A1A; border: 1px solid var(--border-input); border-radius: 10px; padding: 11px 12px; outline: none; width: 100%; box-sizing: border-box; }
+  .ae-textarea { font-family: 'Manrope', sans-serif; font-size: 14px; background: #1A1A1A; border: 1px solid var(--border-input); border-radius: 10px; padding: 11px 12px; outline: none; width: 100%; box-sizing: border-box; resize: vertical; }
   .ae-3col { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
   .ae-2col { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
   .ae-save-row { display: flex; justify-content: flex-end; }
-  .ae-save { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: #1C1410; background: #F4A723; border: none; border-radius: 10px; padding: 12px 18px; cursor: pointer; box-shadow: 0 2px 10px rgba(244,167,35,0.3); }
+  .ae-save { font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600; color: #1C1410; background: #F4A723; border: none; border-radius: 10px; padding: 12px 18px; cursor: pointer; box-shadow: 0 2px 10px rgba(244,167,35,0.3); }
   .ae-save:disabled { cursor: not-allowed; }
   @media (max-width: 1024px) { .admin-shell { --admin-columns: 1fr; --admin-aside-position: static; --admin-aside-height: auto; } }
 </style>
@@ -70,7 +70,7 @@
   <aside class="admin-sidebar">
     <a class="admin-brand" href="/admin">
       <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect width="34" height="34" rx="8" fill="#10A37F"/><line x1="17" y1="27" x2="17" y2="15" stroke="#0D0D0D" stroke-width="1.7" stroke-linecap="round"/><path d="M17 21 C16 19 13 18 11 14.5 C11 14.5 15.5 13 17 17.5" fill="#F59E0B"/><path d="M17 18 C18 15.5 21.5 14 24 10.5 C24 10.5 19.5 10 17 14.5" fill="rgba(236,236,236,0.88)"/></svg>
-      <div><div class="nm">SproutNet</div><div class="sub">admin panel</div></div>
+      <div><div class="nm">Solmira</div><div class="sub">admin panel</div></div>
     </a>
     <div class="admin-card admin-access">
       <div class="lbl">YOUR ACCESS</div>

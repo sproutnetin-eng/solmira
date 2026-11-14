@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Problems — SproutNet Admin</title>
+<title>Problems — Solmira Admin</title>
 <link rel="stylesheet" href="/assets/styles.css">
 <style>
   .admin-theme { --bg-main: #F6F7F8; --bg-surface: #FFFFFF; --bg-card: #FFFFFF; --bg-hover: #F0F2F4; --border-primary: #E5E7EB; --border-secondary: #D1D5DB; --border-input: #D1D5DB; --text-primary: #000000; --text-secondary: #000000; --text-muted: #000000; --text-disabled: #000000; --accent-primary: #10A37F; --accent-hover: #1DBF93; --danger: #EF4444; --warning: #F59E0B; background: var(--bg-main); color: var(--text-primary); }
   .admin-theme * { box-sizing: border-box; color: #000000 !important; }
   .admin-theme ::placeholder { color: #000000 !important; opacity: 0.55; }
-  .admin-shell { min-height: 100vh; background: var(--bg-main); color: var(--text-primary); font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; --admin-columns: 260px 1fr; --admin-aside-position: sticky; --admin-aside-height: 100vh; }
+  .admin-shell { min-height: 100vh; background: var(--bg-main); color: var(--text-primary); font-family: 'Manrope', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; --admin-columns: 260px 1fr; --admin-aside-position: sticky; --admin-aside-height: 100vh; }
   .admin-grid { display: grid; grid-template-columns: var(--admin-columns, 260px 1fr); min-height: 100vh; }
   .admin-sidebar { border-right: 1px solid var(--border-primary); background: var(--bg-surface); padding: clamp(16px, 3vw, 22px) clamp(14px, 3vw, 18px); position: var(--admin-aside-position, sticky); top: 0; height: var(--admin-aside-height, 100vh); overflow-y: auto; }
   .admin-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 18px; }
@@ -24,11 +24,11 @@
   .admin-sidebar-link { text-decoration: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; border-radius: 12px; background: var(--bg-surface); border: 1px solid var(--border-primary); }
   .admin-sidebar-link--active { background: var(--bg-hover); border-color: var(--border-secondary); box-shadow: inset 3px 0 0 var(--accent-primary); }
   .admin-links { display: grid; gap: 8px; }
-  .admin-links .t { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 800; }
+  .admin-links .t { font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 800; }
   .admin-links .m { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
   .admin-tools { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-primary); display: grid; gap: 6px; }
   .admin-tools .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-  .admin-tools button { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; background: transparent; border: 1px solid var(--border-primary); border-radius: 8px; padding: 8px 12px; cursor: pointer; text-align: left; }
+  .admin-tools button { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; background: transparent; border: 1px solid var(--border-primary); border-radius: 8px; padding: 8px 12px; cursor: pointer; text-align: left; }
   .admin-tools button:disabled { cursor: not-allowed; opacity: 0.6; }
   .admin-tools .tmsg { font-size: 11px; font-family: 'JetBrains Mono', monospace; line-height: 1.4; }
   .admin-back { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(148,163,184,0.12); }
@@ -36,8 +36,8 @@
   .admin-pill { font-family: "JetBrains Mono", monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--border-secondary); background: var(--bg-hover); }
   .admin-pill--accent { border-color: rgba(16,163,127,0.35); background: rgba(16,163,127,0.12); }
   .admin-pill--warning { border-color: rgba(245,158,11,0.35); background: rgba(245,158,11,0.12); }
-  .admin-input, .admin-select { width: 100%; font-family: "DM Sans", sans-serif; font-size: 14px; background: var(--bg-hover); border: 1px solid var(--border-input); border-radius: 12px; padding: 10px 12px; outline: none; }
-  .admin-btn { font-family: "DM Sans", sans-serif; font-size: 12px; font-weight: 800; border-radius: 12px; padding: 8px 10px; cursor: pointer; border: 1px solid var(--border-secondary); background: var(--bg-surface); }
+  .admin-input, .admin-select { width: 100%; font-family: 'Manrope', sans-serif; font-size: 14px; background: var(--bg-hover); border: 1px solid var(--border-input); border-radius: 12px; padding: 10px 12px; outline: none; }
+  .admin-btn { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 800; border-radius: 12px; padding: 8px 10px; cursor: pointer; border: 1px solid var(--border-secondary); background: var(--bg-surface); }
   .admin-btn:disabled { cursor: not-allowed; opacity: 0.6; }
   .admin-btn--primary { background: var(--accent-primary); border-color: rgba(16,163,127,0.7); }
   .admin-btn--warning { background: var(--warning); border-color: rgba(245,158,11,0.7); }
@@ -60,7 +60,7 @@
   .ap-row { border-bottom: 1px solid var(--border-primary); }
   .ap-pt { font-family: Sora, sans-serif; font-size: 13px; font-weight: 900; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .ap-ps { font-family: 'JetBrains Mono', monospace; font-size: 10px; margin-top: 3px; }
-  .ap-cell { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ap-cell { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .ap-type { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
   .ap-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
   .ap-acts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
@@ -83,7 +83,7 @@
   <aside class="admin-sidebar">
     <a class="admin-brand" href="/admin">
       <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect width="34" height="34" rx="8" fill="#10A37F"/><line x1="17" y1="27" x2="17" y2="15" stroke="#0D0D0D" stroke-width="1.7" stroke-linecap="round"/><path d="M17 21 C16 19 13 18 11 14.5 C11 14.5 15.5 13 17 17.5" fill="#F59E0B"/><path d="M17 18 C18 15.5 21.5 14 24 10.5 C24 10.5 19.5 10 17 14.5" fill="rgba(236,236,236,0.88)"/></svg>
-      <div><div class="nm">SproutNet</div><div class="sub">admin panel</div></div>
+      <div><div class="nm">Solmira</div><div class="sub">admin panel</div></div>
     </a>
     <div class="admin-card admin-access">
       <div class="lbl">YOUR ACCESS</div>

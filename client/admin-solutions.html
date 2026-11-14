@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Solutions — SproutNet Admin</title>
-<link rel="stylesheet" href="/assets/styles.css">
+<title>Solutions — Solmira Admin</title>
+<link rel="stylesheet" href="/assets/styles.css?v=solmira-ui">
 <style>
   .admin-theme { --bg-main: #F6F7F8; --bg-surface: #FFFFFF; --bg-card: #FFFFFF; --bg-hover: #F0F2F4; --border-primary: #E5E7EB; --border-secondary: #D1D5DB; --border-input: #D1D5DB; --text-primary: #000000; --text-secondary: #000000; --text-muted: #000000; --text-disabled: #000000; --accent-primary: #10A37F; --accent-hover: #1DBF93; --danger: #EF4444; --warning: #F59E0B; background: var(--bg-main); color: var(--text-primary); }
   .admin-theme * { box-sizing: border-box; color: #000000 !important; }
   .admin-theme ::placeholder { color: #000000 !important; opacity: 0.55; }
-  .admin-shell { min-height: 100vh; background: var(--bg-main); color: var(--text-primary); font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; --admin-columns: 260px 1fr; --admin-aside-position: sticky; --admin-aside-height: 100vh; }
+  .admin-shell { min-height: 100vh; background: var(--bg-main); color: var(--text-primary); font-family: 'Manrope', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; --admin-columns: 260px 1fr; --admin-aside-position: sticky; --admin-aside-height: 100vh; }
   .admin-grid { display: grid; grid-template-columns: var(--admin-columns, 260px 1fr); min-height: 100vh; }
   .admin-sidebar { border-right: 1px solid var(--border-primary); background: var(--bg-surface); padding: clamp(16px, 3vw, 22px) clamp(14px, 3vw, 18px); position: var(--admin-aside-position, sticky); top: 0; height: var(--admin-aside-height, 100vh); overflow-y: auto; }
   .admin-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 18px; }
@@ -23,18 +23,18 @@
   .admin-sidebar-link { text-decoration: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; border-radius: 12px; background: var(--bg-surface); border: 1px solid var(--border-primary); }
   .admin-sidebar-link--active { background: var(--bg-hover); border-color: var(--border-secondary); box-shadow: inset 3px 0 0 var(--accent-primary); }
   .admin-links { display: grid; gap: 8px; }
-  .admin-links .t { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 800; }
+  .admin-links .t { font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 800; }
   .admin-links .m { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
   .admin-tools { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-primary); display: grid; gap: 6px; }
   .admin-tools .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-  .admin-tools button { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; background: transparent; border: 1px solid var(--border-primary); border-radius: 8px; padding: 8px 12px; cursor: pointer; text-align: left; }
+  .admin-tools button { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; background: transparent; border: 1px solid var(--border-primary); border-radius: 8px; padding: 8px 12px; cursor: pointer; text-align: left; }
   .admin-tools button:disabled { cursor: not-allowed; opacity: 0.6; }
   .admin-tools .tmsg { font-size: 11px; font-family: 'JetBrains Mono', monospace; line-height: 1.4; }
   .admin-back { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(148,163,184,0.12); }
   .admin-back a { justify-content: center; }
   .admin-pill { font-family: "JetBrains Mono", monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--border-secondary); background: var(--bg-hover); }
   .admin-pill--accent { border-color: rgba(16,163,127,0.35); background: rgba(16,163,127,0.12); }
-  .admin-btn { font-family: "DM Sans", sans-serif; font-size: 12px; font-weight: 800; border-radius: 12px; padding: 8px 10px; cursor: pointer; border: 1px solid var(--border-secondary); background: var(--bg-surface); }
+  .admin-btn { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 800; border-radius: 12px; padding: 8px 10px; cursor: pointer; border: 1px solid var(--border-secondary); background: var(--bg-surface); }
   .admin-linkbtn { text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
   .admin-table { overflow: hidden; overflow-x: auto; border-radius: 16px; border: 1px solid var(--border-primary); background: var(--bg-surface); }
   .admin-head { min-height: 64px; padding: 10px clamp(16px, 3vw, 26px); display: flex; align-items: center; justify-content: flex-end; border-bottom: 1px solid var(--border-primary); background: rgba(246,247,248,0.9); position: sticky; top: 0; z-index: 50; }
@@ -43,8 +43,8 @@
   .as-title { font-family: Sora, sans-serif; font-size: clamp(22px, 4.5vw, 28px); font-weight: 950; letter-spacing: -0.6px; margin: 0 0 8px; }
   .as-sub { font-size: 14px; font-weight: 500; margin: 0 0 16px; }
   .as-filters { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
-  .as-search { flex: 1 1 260px; font-family: 'DM Sans', sans-serif; font-size: 13px; background: #1A1A1A; border: 1px solid var(--border-input); border-radius: 10px; padding: 10px 14px; outline: none; }
-  .as-select { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; background: #1A1A1A; border: 1px solid var(--border-input); border-radius: 10px; padding: 10px 14px; outline: none; cursor: pointer; }
+  .as-search { flex: 1 1 260px; font-family: 'Manrope', sans-serif; font-size: 13px; background: #1A1A1A; border: 1px solid var(--border-input); border-radius: 10px; padding: 10px 14px; outline: none; }
+  .as-select { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; background: #1A1A1A; border: 1px solid var(--border-input); border-radius: 10px; padding: 10px 14px; outline: none; cursor: pointer; }
   .as-count { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
   .as-empty { text-align: center; padding: 80px 24px; background: var(--bg-surface); border-radius: 18px; border: 1px solid var(--border-primary); }
   .as-empty .big { font-size: 40px; margin-bottom: 16px; }
@@ -57,8 +57,8 @@
   .as-row { cursor: pointer; }
   .as-row.open { background: var(--bg-hover); }
   .as-pt { font-family: Sora, sans-serif; font-size: 13px; font-weight: 900; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .as-sn { font-family: 'DM Sans', sans-serif; font-size: 11px; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .as-dom { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .as-sn { font-family: 'Manrope', sans-serif; font-size: 11px; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .as-dom { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .as-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; padding: 4px 9px; border-radius: 999px; text-transform: uppercase; }
   .as-tag.team { background: rgba(96,165,250,0.12); border: 1px solid rgba(96,165,250,0.35); }
   .as-tag.indiv { background: rgba(45,212,191,0.12); border: 1px solid rgba(45,212,191,0.35); }
@@ -73,12 +73,12 @@
   .as-sec { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
   .as-link { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-radius: 8px; border: 1px solid var(--border-primary); text-decoration: none; min-width: 0; }
   .as-link .k { font-family: 'JetBrains Mono', monospace; font-size: 10px; }
-  .as-link .t { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .as-link .go { margin-left: auto; font-family: 'DM Sans', sans-serif; font-size: 11px; }
+  .as-link .t { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .as-link .go { margin-left: auto; font-family: 'Manrope', sans-serif; font-size: 11px; }
   .as-flabel { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px; }
-  .as-fbody { font-family: 'DM Sans', sans-serif; font-size: 13px; line-height: 1.65; }
-  .as-na { font-family: 'DM Sans', sans-serif; font-size: 12px; font-style: italic; }
-  .as-nomatch { text-align: center; padding: 48px 24px; font-family: 'DM Sans', sans-serif; font-size: 13px; border: 1px dashed var(--border-primary); border-radius: 14px; margin-top: 12px; }
+  .as-fbody { font-family: 'Manrope', sans-serif; font-size: 13px; line-height: 1.65; }
+  .as-na { font-family: 'Manrope', sans-serif; font-size: 12px; font-style: italic; }
+  .as-nomatch { text-align: center; padding: 48px 24px; font-family: 'Manrope', sans-serif; font-size: 13px; border: 1px dashed var(--border-primary); border-radius: 14px; margin-top: 12px; }
   @media (max-width: 1024px) { .admin-shell { --admin-columns: 1fr; --admin-aside-position: static; --admin-aside-height: auto; } }
 </style>
 </head>
@@ -89,7 +89,7 @@
   <aside class="admin-sidebar">
     <a class="admin-brand" href="/admin">
       <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect width="34" height="34" rx="8" fill="#10A37F"/><line x1="17" y1="27" x2="17" y2="15" stroke="#0D0D0D" stroke-width="1.7" stroke-linecap="round"/><path d="M17 21 C16 19 13 18 11 14.5 C11 14.5 15.5 13 17 17.5" fill="#F59E0B"/><path d="M17 18 C18 15.5 21.5 14 24 10.5 C24 10.5 19.5 10 17 14.5" fill="rgba(236,236,236,0.88)"/></svg>
-      <div><div class="nm">SproutNet</div><div class="sub">admin panel</div></div>
+      <div><div class="nm">Solmira</div><div class="sub">admin panel</div></div>
     </a>
     <div class="admin-card admin-access">
       <div class="lbl">YOUR ACCESS</div>
@@ -129,6 +129,7 @@
 <script type="module">
 import { api, requireRole, renderNav, esc, alertBox, logout } from '/assets/app.js';
 import { icon } from '/assets/icons.js';
+import { payButtonHtml, wirePayButtons } from '/assets/payables.js?v=20261113-amt-inv';
 renderNav();
 const me = await requireRole('admin');
 const msg = document.getElementById('msg');
@@ -182,7 +183,11 @@ function render() {
               <div class="as-date">${esc(submitted)}</div>
               <div><span class="as-tag ${st}">${esc(s.status)}${s.score != null ? ` · ${esc(s.score)}` : ''}</span></div>
               <div>${dl.length ? `<span class="as-tag final">${icon('package', 13)} ${dl.length}</span>` : `<span class="as-dash">—</span>`}</div>
-              <div style="display:flex;gap:6px;justify-content:flex-end"><button type="button" class="admin-btn admin-linkbtn" style="font-size:11px" data-act="toggle-btn">${expanded ? 'Hide' : 'View'}</button></div>
+              <div style="display:flex;gap:6px;justify-content:flex-end;align-items:center">${payButtonHtml({
+                submissionId: s.id, problemId: s.problemId, status: s.status,
+                reward: s.rewardAmount, posterId: s.problemPosterId, me,
+                rewardPaid: s.rewardPaid, paymentStatus: s.paymentStatus,
+              })}<button type="button" class="admin-btn admin-linkbtn" style="font-size:11px" data-act="toggle-btn">${expanded ? 'Hide' : 'View'}</button></div>
             </div>
             ${expanded ? `<div class="as-detail">
               <div><div class="as-sec">Final deliverables (${dl.length})</div>
@@ -209,6 +214,14 @@ if (me) {
     const d = await api('/api/admin/solutions');
     items = d.solutions;
     render();
+    wirePayButtons(body, {
+      me,
+      onPaid: async () => {
+        try { const r = await api('/api/admin/solutions'); items = r.solutions; render(); }
+        catch (err) { msg.innerHTML = alertBox(err.message); }
+      },
+      onError: (m) => { msg.innerHTML = alertBox(m); },
+    });
   } catch (e) { msg.innerHTML = alertBox(e.message); }
   const tm = document.getElementById('tool-msg');
   document.getElementById('seed-btn').addEventListener('click', async (ev) => {
@@ -225,6 +238,7 @@ if (me) {
   });
 }
 body.addEventListener('click', (e) => {
+  if (e.target.closest('[data-pay-submission], .sn-pay-group, input')) return;
   const btn = e.target.closest('[data-act]');
   if (!btn) return;
   const id = btn.closest('.as-item').dataset.id;

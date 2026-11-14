@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Solutions — SproutNet</title>
-<link rel="stylesheet" href="/assets/styles.css">
+<title>Student Solutions — Solmira</title>
+<link rel="stylesheet" href="/assets/styles.css?v=solmira-ui">
 <style>
   .ps-wrap { max-width: 1100px; margin: 0 auto; padding: clamp(32px, 6vw, 52px) clamp(16px, 4vw, 24px); }
   .ps-head { margin-bottom: 24px; }
   .ps-head h1 { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(28px, 6vw, 38px); font-weight: 400; color: #1C1410; letter-spacing: -0.5px; margin: 0 0 8px; }
   .ps-head p { font-size: 15px; color: #4A3F38; font-weight: 300; margin: 0; }
   .ps-filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
-  .ps-filter { font-family: 'DM Sans', sans-serif; font-size: 14px; color: #1C1410; background: #fff; border: 1.5px solid rgba(28,20,16,0.12); border-radius: 8px; padding: 10px 14px; outline: none; box-sizing: border-box; }
+  .ps-filter { font-family: 'Manrope', sans-serif; font-size: 14px; color: #1C1410; background: #fff; border: 1.5px solid rgba(28,20,16,0.12); border-radius: 8px; padding: 10px 14px; outline: none; box-sizing: border-box; }
   .ps-filter.problem { flex: 1 1 220px; }
   .ps-empty { text-align: center; padding: 80px 24px; background: #fff; border-radius: 12px; border: 1.5px solid rgba(28,20,16,0.07); }
   .ps-empty .big { font-size: 40px; margin-bottom: 16px; }
@@ -33,7 +33,10 @@
   .ps-status.judged, .ps-status.draft { color: #57534e; background: rgba(28,20,16,0.06); border: 1px solid rgba(28,20,16,0.15); }
   .ps-score { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; color: #2D6A4F; }
   .ps-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9CA3A0; }
-  .ps-toggle { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700; color: #1C1410; background: #F4A723; border: none; border-radius: 8px; padding: 8px 16px; cursor: pointer; }
+  .ps-toggle { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 700; color: #1C1410; background: #F4A723; border: none; border-radius: 8px; padding: 8px 16px; cursor: pointer; }
+  .ps-pay-action { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 700; color: #fff; background: #2D6A4F; border: none; border-radius: 8px; padding: 8px 14px; cursor: pointer; white-space: nowrap; }
+  .ps-pay-action:disabled { cursor: not-allowed; opacity: 0.6; }
+  .ps-pay-group { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .ps-panel { border-top: 1px solid rgba(28,20,16,0.08); padding: 20px; display: grid; gap: 18px; background: #FFFDF8; }
   .ps-judge { border: 1.5px solid rgba(244,167,35,0.4); background: #fff; border-radius: 12px; padding: 16px; display: grid; gap: 12px; }
   .ps-judge .cap { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #92400e; text-transform: uppercase; letter-spacing: 0.1em; }
@@ -41,10 +44,10 @@
   .ps-scores { display: flex; gap: 5px; flex-wrap: wrap; }
   .ps-scores button { width: 34px; height: 34px; border-radius: 8px; border: 1.5px solid rgba(28,20,16,0.15); background: #FAF8F4; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; color: #1C1410; cursor: pointer; }
   .ps-scores button.on { border-color: #2D6A4F; background: #EAF4EE; }
-  .ps-judge textarea { width: 100%; box-sizing: border-box; font-family: 'DM Sans', sans-serif; font-size: 13px; color: #1C1410; background: #FAF8F4; border: 1.5px solid rgba(28,20,16,0.12); border-radius: 8px; padding: 10px 12px; outline: none; resize: vertical; }
+  .ps-judge textarea { width: 100%; box-sizing: border-box; font-family: 'Manrope', sans-serif; font-size: 13px; color: #1C1410; background: #FAF8F4; border: 1.5px solid rgba(28,20,16,0.12); border-radius: 8px; padding: 10px 12px; outline: none; resize: vertical; }
   .ps-verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .ps-approve { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; color: #fff; background: #2D6A4F; border: none; border-radius: 8px; padding: 11px 0; cursor: pointer; }
-  .ps-reject { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; color: #DC2626; background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.3); border-radius: 8px; padding: 11px 0; cursor: pointer; }
+  .ps-approve { font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; color: #fff; background: #2D6A4F; border: none; border-radius: 8px; padding: 11px 0; cursor: pointer; }
+  .ps-reject { font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; color: #DC2626; background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.3); border-radius: 8px; padding: 11px 0; cursor: pointer; }
   .ps-approve:disabled, .ps-reject:disabled { cursor: not-allowed; opacity: 0.6; }
   .ps-result { border-radius: 8px; padding: 12px 14px; font-size: 13px; }
   .ps-result.approved { color: #15803d; background: rgba(21,128,61,0.08); border: 1px solid rgba(21,128,61,0.2); }
@@ -52,7 +55,7 @@
   .ps-sec { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #2D6A4F; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
   .ps-field { margin-bottom: 12px; }
   .ps-field:last-child { margin-bottom: 0; }
-  .ps-flabel { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700; color: #1C1410; margin-bottom: 4px; }
+  .ps-flabel { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 700; color: #1C1410; margin-bottom: 4px; }
   .ps-fbody { font-size: 13px; color: #4A3F38; line-height: 1.65; white-space: pre-wrap; overflow-wrap: break-word; }
   .ps-na { font-size: 12px; color: #9CA3A0; font-style: italic; }
   .ps-link { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-radius: 8px; border: 1px solid rgba(28,20,16,0.12); background: #fff; text-decoration: none; margin-bottom: 8px; }
@@ -73,8 +76,8 @@
   <div class="ps-filters">
     <select class="ps-filter problem" id="filter"><option value="all">All problems</option></select>
     <select class="ps-filter" id="status-filter">
-      <option value="pending">Needs review</option>
       <option value="all">All statuses</option>
+      <option value="pending">Needs review</option>
       <option value="approved">Approved</option>
       <option value="rejected">Rejected</option>
     </select>
@@ -85,6 +88,8 @@
 <script type="module">
 import { api, apiCacheClear, requireRole, renderNav, esc, alertBox } from '/assets/app.js';
 import { icon } from '/assets/icons.js';
+import { rupees } from '/assets/payments.js?v=20261113-amt-inv';
+import { downloadInvoiceFromButton } from '/assets/invoice.js?v=20261113-amt-inv';
 renderNav();
 const me = await requireRole('poster', 'admin');
 const msg = document.getElementById('msg');
@@ -94,6 +99,57 @@ const statusFilter = document.getElementById('status-filter');
 const LABELS = [['f_understanding', 'Problem Understanding'], ['f_rootcause', 'Root Cause Analysis'], ['f_solution', 'Proposed Solution'], ['f_feasibility', 'Feasibility Assessment'], ['f_impact', 'Expected Impact'], ['f_risks', 'Risks & Limitations'], ['f_implementation', 'Implementation Plan']];
 let subs = [];
 let openId = null;
+let payBySub = {};   // submission_id -> payment row
+let paidProblems = new Set();  // problem_id rewarded already (paid once per problem)
+async function loadPayments() {
+  try {
+    const { payments } = await api('/api/payments/mine');
+    payBySub = {};
+    paidProblems = new Set();
+    for (const p of payments || []) {
+      payBySub[p.submission_id] = p;
+      if (p.status === 'paid') paidProblems.add(p.problem_id);
+    }
+  } catch { payBySub = {}; paidProblems = new Set(); }
+}
+
+function payPanel(s, dl) {
+  const reward = Number(s.problems?.reward_amount || 0);
+  if (s.status !== 'approved') {
+    return `<div class="ps-judge">
+      <span class="cap">Reward payment</span>
+      <div class="meta">Approve this solution to unlock Razorpay checkout.</div>
+    </div>`;
+  }
+  const pay = payBySub[s.id];
+  if (pay && pay.status === 'paid') {
+    return `<div class="ps-result approved"><strong>Paid</strong> \u00B7 ${rupees(pay.amount_paise)}
+      <button type="button" class="sn-pay-inv" data-invoice-for="${esc(s.id)}" style="margin-left:8px">Download invoice</button></div>`;
+  }
+  if (paidProblems.has(s.problem_id)) {
+    return `<div class="ps-result approved"><strong>Reward paid</strong> \u00B7 this problem's reward has already been released.</div>`;
+  }
+  return `<div class="ps-judge">
+    <span class="cap">Release reward</span>
+    <div class="meta">Pay through Razorpay — the amount is set on the checkout page. Funds settle to Solmira's account; the admin releases the solver's share.${s.locked ? ' The full solution unlocks after payment.' : ''}</div>
+    <span class="ps-pay-group">
+      <button type="button" class="ps-approve" data-act="pay">Pay${reward > 0 ? ` ${rupees(reward)}` : ''} with Razorpay</button>
+    </span>
+  </div>`;
+}
+function rowPaymentAction(s) {
+  const reward = Number(s.problems?.reward_amount || 0);
+  const payment = payBySub[s.id];
+  if (s.status !== 'approved') return '';
+  if (payment?.status === 'paid') return `<span class="sn-pay-group sn-pay-paid">
+    <span class="sn-pay-state paid">Paid</span>
+    <button type="button" class="sn-pay-inv" data-invoice-for="${esc(s.id)}">Invoice</button>
+  </span>`;
+  if (paidProblems.has(s.problem_id)) return `<span class="sn-pay-state">Reward paid</span>`;
+  return `<span class="ps-pay-group">
+    <button type="button" class="ps-pay-action" data-act="pay">Pay${reward > 0 ? ` ${rupees(reward)}` : ''} with Razorpay</button>
+  </span>`;
+}
 const scores = {};
 const feedbacks = {};
 
@@ -134,6 +190,10 @@ function visibleRows() {
 
 function fieldHtml(key, label, s) {
   const F = s.fields || {};
+  const file = s.fieldFiles?.[key];
+  if (file && file.url) {
+    return `<div class="ps-field"><div class="ps-flabel">${label}</div><a class="ps-link" href="${esc(file.url)}" target="_blank" rel="noreferrer"><span class="k">FILE</span><span class="t">${esc(file.name)}</span><span class="go">open ↗</span></a></div>`;
+  }
   if (key === 'f_implementation') {
     const { text, files } = implParts(F[key]);
     const fbody = text.trim()
@@ -156,21 +216,30 @@ function render() {
   }
   list.innerHTML = `<div class="ps-list">` + rows.map((s) => {
     const open = openId === s.id;
+    const locked = Boolean(s.locked);
     const dl = normalizeDelivs(s.deliverables);
     const F = s.fields || {};
-    const answered = LABELS.filter(([k]) => String(F[k] || '').trim()).length;
+    const answered = LABELS.filter(([k]) => String(F[k] || '').trim() || s.fieldFiles?.[k]?.url).length;
     const score = scores[s.id] ?? 7;
     const judgeOpen = s.status === 'pending';
     const panel = open ? `<div class="ps-panel">
       ${judgeOpen ? `<div class="ps-judge">
-        <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline"><span class="cap">Judge this solution</span><span class="meta">${answered}/7 sections answered · ${dl.length} deliverable${dl.length === 1 ? '' : 's'}</span></div>
+        <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline"><span class="cap">Judge this solution</span><span class="meta">${locked ? (s.preview ? 'Preview ready for review' : 'No preview provided') : `${answered}/7 sections answered · ${dl.length} deliverable${dl.length === 1 ? '' : 's'}`}</span></div>
         <div><div class="ps-flabel" style="margin-bottom:6px">Score — ${score}/10</div>
           <div class="ps-scores">${Array.from({ length: 11 }, (_, n) => `<button type="button" data-score="${n}" class="${n === score ? 'on' : ''}">${n}</button>`).join('')}</div></div>
         <textarea rows="2" data-f="feedback" placeholder="Feedback for the student (optional) — shown with the result…">${esc(feedbacks[s.id] || '')}</textarea>
         <div class="ps-verdict"><button type="button" class="ps-reject" data-act="reject">${icon('x', 13)} Reject</button><button type="button" class="ps-approve" data-act="approve">${icon('check', 13)} Approve</button></div>
       </div>` : `<div class="ps-result ${s.status === 'approved' ? 'approved' : 'rejected'}"><strong style="text-transform:capitalize">${esc(s.status)}</strong>${s.score != null ? ` · Score ${esc(String(s.score))}/10` : ''}${s.judge_feedback ? `<div style="margin-top:6px">${esc(s.judge_feedback)}</div>` : ''}</div>`}
-      ${dl.length ? `<div><div class="ps-sec">Deliverables (${dl.length})</div>${dl.map((d, i) => `<a class="ps-link" href="${esc(d.url)}" target="_blank" rel="noreferrer"><span class="k">${esc((d.kind || 'link').toUpperCase())}</span><span class="t">${i + 1}. ${esc(d.label || d.url)}</span><span class="go">open ↗</span></a>`).join('')}</div>` : ''}
-      <div><div class="ps-sec">Full written solution</div>${LABELS.map(([k, l]) => fieldHtml(k, l, s)).join('')}</div>
+      ${locked ? `<div><div class="ps-sec">Solution preview</div>
+        <div class="ps-fbody" style="white-space:pre-wrap">${esc(s.preview || 'No preview was provided.')}</div>
+        <div class="meta" style="margin-top:8px">${icon('eye', 13)} The full written solution unlocks after the reward payment.</div></div>` : ''}
+      ${dl.length ? `<div><div class="ps-sec">Deliverables (${dl.length})</div>${dl.map((d, i) => d.url
+        ? `<a class="ps-link" href="${esc(d.url)}" target="_blank" rel="noreferrer"><span class="k">${esc((d.kind || 'link').toUpperCase())}</span><span class="t">${i + 1}. ${esc(d.label || d.url)}</span><span class="go">open ↗</span></a>`
+        : `<span class="ps-link" style="opacity:.75;cursor:default"><span class="k">${esc((d.kind || 'link').toUpperCase())}</span><span class="t">${i + 1}. ${esc(d.label || 'Deliverable')}</span><span class="go">after payment</span></span>`).join('')}</div>` : ''}
+      ${payPanel(s, dl)}
+      ${locked
+        ? `<div class="meta">Pay the reward to unlock the full 7-field solution, attached files and deliverable links.</div>`
+        : `<div><div class="ps-sec">Full written solution</div>${LABELS.map(([k, l]) => fieldHtml(k, l, s)).join('')}</div>`}
       <div><a class="ps-problink" href="/problems/${esc(s.problem_id)}">View problem page ↗</a></div>
     </div>` : '';
     return `<div class="ps-card" data-id="${esc(s.id)}">
@@ -184,6 +253,7 @@ function render() {
           <span class="ps-status ${esc(s.status || 'pending')}">${esc(s.status || 'pending')}</span>
           ${s.score != null ? `<span class="ps-score">${esc(String(s.score))}/10</span>` : ''}
           <span class="ps-date">${esc(submittedOn(s.created_at))}</span>
+          ${rowPaymentAction(s)}
           <button type="button" class="ps-toggle" data-act="toggle-btn">${open ? 'Close' : 'Review'}</button>
         </div>
       </div>
@@ -197,9 +267,10 @@ function render() {
 if (me) {
   try {
     apiCacheClear(); // drop any pre-fix cached payload (response shape changed)
+    await loadPayments();
     const { problems, submissions } = await api('/api/poster/submissions');
     subs = Array.isArray(submissions) ? submissions : [];
-    if (subs.length && !subs.some((s) => s && s.fields)) {
+    if (subs.length && !subs.some((s) => s && (s.fields || s.locked !== undefined))) {
       msg.innerHTML = alertBox('Solution text is missing from the API response. Restart the server (npm run serve or serve:dev) so the updated /api/poster/submissions loads.');
     }
     const qp = new URLSearchParams(location.search).get('problem');
@@ -218,6 +289,22 @@ list.addEventListener('click', async (e) => {
     render();
     return;
   }
+  const invBtn = e.target.closest('[data-invoice-for]');
+  if (invBtn && !invBtn.disabled) {
+    e.preventDefault();
+    e.stopPropagation();
+    try {
+      const summary = await api(`/api/payments/checkout/${encodeURIComponent(invBtn.dataset.invoiceFor)}`);
+      if (summary?.payment?.status !== 'paid') throw new Error('This payment is not settled yet.');
+      await downloadInvoiceFromButton(invBtn, summary.payment, {
+        problemTitle: summary.problem?.title,
+        posterName: summary.poster?.name,
+        solverName: summary.solver?.name,
+        feePercent: summary.fee_percent,
+      });
+    } catch (err) { msg.innerHTML = alertBox(err.message); }
+    return;
+  }
   const t = e.target.closest('[data-act]');
   if (!t) return;
   const card = t.closest('.ps-card');
@@ -225,8 +312,13 @@ list.addEventListener('click', async (e) => {
   const act = t.dataset.act;
   if (act === 'toggle' || act === 'toggle-btn') {
     if (t.tagName === 'BUTTON' && act === 'toggle-btn') { openId = openId === id ? null : id; render(); return; }
-    if (e.target.closest('button, a, textarea')) return;
+    if (e.target.closest('button, a, textarea, input, select')) return;
     openId = openId === id ? null : id; render(); return;
+  }
+  if (act === 'pay') {
+    // The amount is entered/edited on the checkout page; Razorpay opens from there.
+    location.href = `/checkout/${encodeURIComponent(id)}`;
+    return;
   }
   t.disabled = true;
   try {

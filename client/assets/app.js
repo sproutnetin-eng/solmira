@@ -182,6 +182,8 @@ export const NAV_ICONS = {
   logout: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>`
 };
 
+export const ARROW_SVG = `<svg class="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
+
 export function isDashboardPage(path = location.pathname) {
   if (path === '/' || path === '/index.html' || path === '/how-it-works') return false;
   if (path.startsWith('/login') || path === '/join' || path === '/forgot-password' || path === '/setup-admin') return false;
@@ -277,7 +279,7 @@ export function applyDashboardLayout(user) {
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       <span>Menu</span>
     </button>
-    <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:14px;color:var(--ink)">${esc(getPageTitle(path))}</div>
+    <div style="font-family:'Manrope',sans-serif;font-weight:600;font-size:14px;color:var(--ink)">${esc(getPageTitle(path))}</div>
   `;
 
   const contentInner = document.createElement('div');
@@ -482,10 +484,15 @@ function paintNav(user) {
   // Guests always get Sign In / Join.
   if (!user) {
     el.innerHTML = `
-    <a class="brand" href="/">${LOGO_SVG}<span>SproutNet</span></a>
+    <a class="brand" href="/"><span>Solmira</span></a>
     <nav class="sn-nav-links">
+      ${isHero ? `
+      <a class="navlink" href="/#about">Overview</a>
+      <a class="navlink" href="/problems">Discover</a>
+      <a class="navlink" href="/#how-it-works">How It Works</a>
+      ` : ''}
       <a class="navlink${isActive('/login') ? ' on' : ''}" href="/login">Sign In</a>
-      <a class="sn-pill amber" style="padding:8px 20px;border-radius:6px;font-weight:600" href="/join">Join →</a>
+      <a class="sn-pill amber" style="padding:8px 18px;border-radius:6px;font-weight:600;display:inline-flex;align-items:center" href="/join"><span>${isHero ? 'Explore Briefs' : 'Join'}</span>${ARROW_SVG}</a>
     </nav>`;
     return;
   }
@@ -497,7 +504,7 @@ function paintNav(user) {
   // the plain Dashboard pill until the background upgrade paints the avatar.
   if (!user.id || isHero) {
     el.innerHTML = `
-    <a class="brand" href="/">${LOGO_SVG}<span>SproutNet</span></a>
+    <a class="brand" href="/"><span>Solmira</span></a>
     <nav class="sn-nav-links">
       <a class="sn-pill amber ${isActive(dashboardHref) ? 'on' : ''}" style="padding:8px 20px;border-radius:6px;font-weight:600;display:inline-flex;align-items:center;gap:6px" href="${dashboardHref}">Dashboard</a>
     </nav>`;
@@ -509,7 +516,7 @@ function paintNav(user) {
   const profileHref = `/profile/${user.profile_slug || user.id}`;
 
   el.innerHTML = `
-    <a class="brand" href="/">${LOGO_SVG}<span>SproutNet</span></a>
+    <a class="brand" href="/"><span>Solmira</span></a>
     <nav class="sn-nav-links">
       <div class="sn-profile-menu">
         <button type="button" class="sn-avatar-btn" id="sn-avatar-btn" aria-haspopup="menu" aria-expanded="false" title="${esc(name)}">
@@ -524,7 +531,7 @@ function paintNav(user) {
                 <span class="sn-drop-name">${esc(name)}</span>
                 <span class="sn-role">${esc(roleLabel)}</span>
               </span>
-              <a class="sn-drop-view" href="${profileHref}" role="menuitem">view profile →</a>
+              <a class="sn-drop-view" href="${profileHref}" role="menuitem"><span>view profile</span>${ARROW_SVG}</a>
             </span>
           </div>
           ${isPoster ? '' : `<a class="sn-drop-link${isActive('/messages') ? ' on' : ''}" href="/messages" role="menuitem">${NAV_ICONS.messages}<span>Messages</span></a>`}
@@ -680,7 +687,7 @@ export async function renderSidebar({ targetId = 'dash-sidebar', user = null, ac
 
   el.innerHTML = `
     <div class="dash-sidebar-header-mobile">
-      <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:15px;color:var(--ink)">Dashboard Menu</span>
+      <span style="font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;color:var(--ink)">Dashboard Menu</span>
       <button type="button" class="dash-sidebar-close" id="dash-sidebar-close" aria-label="Close menu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
 

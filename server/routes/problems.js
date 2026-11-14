@@ -993,12 +993,24 @@ router.post('/api/problems/update', authRequired, loadProfile, requireRole('post
   const admin = getAdmin();
   const { data: problem } = await admin
     .from('problems')
-    .select('poster_id')
+    .select('poster_id, reward_amount')
     .eq('id', payload.id)
     .single();
 
   if (!problem || (req.profile.role === 'poster' && problem.poster_id !== user.id)) {
     return res.status(404).json({ error: 'Not found' });
+  }
+
+  // Lock the reward once a payment has been started or completed.
+  const { count } = await admin.from('payments')
+    .select('id', { count: 'exact', head: true })
+    .eq('problem_id', payload.id)
+    .in('status', ['created', 'paid']);
+
+  if (count > 0 && Number(payload.reward_amount ?? 0) !== Number(problem.reward_amount ?? 0)) {
+    return res.status(409).json({
+      error: 'The reward cannot be changed once a payment has been started.',
+    });
   }
 
   const validTeamModes = ['solo', 'team', 'both'];

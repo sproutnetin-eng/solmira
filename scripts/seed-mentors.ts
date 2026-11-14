@@ -15,7 +15,6 @@ const admin = createClient(supabaseUrl, serviceKey, {
 const MENTORS: Array<Record<string, any>> = [
   // Example mentors removed per request — only real mentors remain in DB:
   //   - Manjunath R (manjunathr@gmail.com)
-  //   - Kshamay P Bharadwaj (kshamay@gmail.com)
   // Kept empty so `npm run seed:mentors` does not re-create deleted accounts.
 ]
 

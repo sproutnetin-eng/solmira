@@ -4,6 +4,7 @@ const router = express.Router();
 const { authRequired, loadProfile, requireRole } = require('../middleware/auth');
 const { getAdmin } = require('../supabase');
 const upload = require('../middleware/upload');
+const { withPreviewCols, implText, implFiles } = require('../lib/solution-preview');
 
 // Shared progress-upload helpers (same named exports as lib/problem-progress.ts).
 // Falls back to an inlined port when server/lib/problem-progress.js is absent.
@@ -332,6 +333,79 @@ router.post('/api/submissions/judge', authRequired, loadProfile, requireRole('po
   return res.status(200).json({ ok: true, score, student_id: sub.student_id });
 });
 
+// ---- GET /api/submissions/full/:id — the complete written solution ----------
+// Flow: preview is public -> poster approves -> poster pays -> unlock.
+// Visible to the author (always), admins (always), and the problem poster
+// only after the reward payment for that problem is captured.
+router.get('/api/submissions/full/:id', authRequired, loadProfile, async (req, res) => {
+  try {
+    const admin = getAdmin();
+    const select = await withPreviewCols(admin,
+      'id, student_id, problem_id, status, score, judge_feedback, final_deliverables, ' +
+      'f_implementation, f_understanding, f_rootcause, f_solution, f_impact, ' +
+      'f_feasibility, f_risks');
+    const { data: sub, error } = await admin.from('submissions')
+      .select(select).eq('id', req.params.id).maybeSingle();
+    if (error) throw new Error(error.message);
+    if (!sub) return res.status(404).json({ error: 'Solution not found.' });
+
+    const isAuthor = sub.student_id === req.user.id;
+    const isAdmin = req.profile?.role === 'admin' || req.profile?.is_master;
+    if (!isAuthor && !isAdmin) {
+      const { data: problem } = await admin.from('problems')
+        .select('poster_id').eq('id', sub.problem_id).maybeSingle();
+      if (!problem || problem.poster_id !== req.user.id) {
+        return res.status(403).json({ error: 'Sign in as the problem poster to view the full solution.' });
+      }
+      const { data: paid } = await admin.from('payments')
+        .select('id').eq('problem_id', sub.problem_id)
+        .eq('status', 'paid').limit(1).maybeSingle();
+      // Legacy submissions (no preview) predate the paywall and stay visible.
+      const legacy = sub.f_preview == null;
+      if (!paid && !legacy) {
+        return res.status(403).json({
+          locked: true,
+          error: 'The full solution unlocks after the reward payment is completed.',
+        });
+      }
+    }
+
+    let fieldFiles = {};
+    if (sub.f_files) {
+      fieldFiles = typeof sub.f_files === 'string'
+        ? JSON.parse(sub.f_files || '{}') : sub.f_files;
+      if (!fieldFiles || typeof fieldFiles !== 'object') fieldFiles = {};
+    }
+    let deliverables = sub.final_deliverables;
+    if (typeof deliverables === 'string') {
+      try { deliverables = JSON.parse(deliverables); } catch { deliverables = []; }
+    }
+    if (!Array.isArray(deliverables)) deliverables = [];
+
+    return res.json({
+      unlocked: true,
+      status: sub.status,
+      score: sub.score ?? null,
+      judge_feedback: sub.judge_feedback || null,
+      preview: sub.f_preview || null,
+      fields: {
+        understanding: sub.f_understanding || '',
+        rootcause: sub.f_rootcause || '',
+        solution: sub.f_solution || '',
+        impact: sub.f_impact || '',
+        feasibility: sub.f_feasibility || '',
+        risks: sub.f_risks || '',
+        implementation: implText(sub.f_implementation),
+      },
+      attachedFiles: implFiles(sub.f_implementation),
+      fieldFiles,
+      deliverables,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // ---- POST /api/submissions/notify-poster ----
 // Called by the student right after submitting all 7 fields. Routes the
 // submission to the poster who posted the problem for review. (Submits are
@@ -384,7 +458,7 @@ router.post('/api/submissions/notify-poster', authRequired, loadProfile, require
     user_id: problem.poster_id,
     event_type: 'SUBMISSION_SUBMITTED',
     title: 'New solution submitted',
-    body: `${student?.name || 'A student'} submitted a 7-field solution for "${problem.title}". Review it to approve or reject.`,
+    body: `${student?.name || 'A student'} submitted a solution preview for "${problem.title}". Review it to approve or reject.`,
     link_url: `/poster/solutions?problem=${problem_id}`,
     metadata: { problem_id, student_id: req.user.id, submission_id: submission.id },
   });

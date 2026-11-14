@@ -4,6 +4,7 @@
 const express = require('express');
 const { getAdmin, getUserFromToken } = require('../supabase');
 const { authRequired, loadProfile } = require('../middleware/auth');
+const { withPreviewCols } = require('../lib/solution-preview');
 
 const router = express.Router();
 
@@ -235,18 +236,19 @@ function parseDeliverables(value) {
 }
 
 // GET /api/public/solutions -> { solutions }
-// GET /api/public/solutions?id=<submissionId> -> { solution } (full detail
-// with the 7 framework fields, for the solution detail page)
+// GET /api/public/solutions?id=<submissionId> -> { solution }
+// Public readers only ever receive the short preview teaser; the 7 full
+// fields unlock for the poster (after payment), the author, and admins via
+// GET /api/submissions/full/:id.
 router.get('/api/public/solutions', async (req, res, next) => {
   try {
     const admin = getAdmin();
     const detailId = typeof req.query.id === 'string' ? req.query.id.trim() : '';
-    const baseSelect = detailId
-      ? 'id, problem_id, student_id, participant_type, score, judge_feedback, final_deliverables, submitted_at, f_understanding, f_rootcause, f_solution, f_impact, f_feasibility, f_risks, f_implementation'
-      : 'id, problem_id, student_id, participant_type, score, judge_feedback, final_deliverables, submitted_at';
+    const baseSelect = 'id, problem_id, student_id, participant_type, score, judge_feedback, final_deliverables, submitted_at';
+    const select = await withPreviewCols(admin, baseSelect);
     let q = admin
       .from('submissions')
-      .select(baseSelect)
+      .select(select)
       .eq('stage', 'full')
       .eq('status', 'approved');
     if (detailId) q = q.eq('id', detailId).limit(1);
@@ -261,20 +263,10 @@ router.get('/api/public/solutions', async (req, res, next) => {
 
     const enriched = await enrichSolutions(admin, completed);
     if (detailId) {
-      const s = enriched[0];
       return res.json({
         solution: {
-          ...s,
-          fields: {
-            understanding: rows[0].f_understanding || '',
-            rootcause: rows[0].f_rootcause || '',
-            solution: rows[0].f_solution || '',
-            impact: rows[0].f_impact || '',
-            feasibility: rows[0].f_feasibility || '',
-            risks: rows[0].f_risks || '',
-            implementation: implText(rows[0].f_implementation),
-            files: implFiles(rows[0].f_implementation),
-          },
+          ...enriched[0],
+          preview: rows[0].f_preview || null,
         },
       });
     }
@@ -284,38 +276,15 @@ router.get('/api/public/solutions', async (req, res, next) => {
   }
 });
 
-// f_implementation may be plain text or JSON { text, files[] } (see submit.html).
-function implText(value) {
-  if (!value) return '';
-  const t = String(value).trim();
-  if (!t.startsWith('{')) return value;
-  try {
-    const j = JSON.parse(t);
-    return typeof j.text === 'string' ? j.text : '';
-  } catch {
-    return value;
-  }
-}
-
-function implFiles(value) {
-  if (!value) return [];
-  const t = String(value).trim();
-  if (!t.startsWith('{')) return [];
-  try {
-    const j = JSON.parse(t);
-    return Array.isArray(j.files) ? j.files.filter((f) => f && typeof f.name === 'string') : [];
-  } catch {
-    return [];
-  }
-}
+// f_implementation parsing lives in server/lib/solution-preview.js.
 
 async function enrichSolutions(admin, completed) {
   const problemIds = Array.from(new Set(completed.map((r) => r.problem_id)));
   const studentIds = Array.from(new Set(completed.map((r) => r.student_id)));
 
-  const [probRes, userRes, teamRes] = await Promise.all([
+  const [probRes, userRes, teamRes, payRes] = await Promise.all([
     problemIds.length
-      ? admin.from('problems').select('id, title, domain').in('id', problemIds)
+      ? admin.from('problems').select('id, title, domain, poster_id, reward_amount').in('id', problemIds)
       : Promise.resolve({ data: [] }),
     studentIds.length
       ? admin.from('users').select('id, name, profile_slug').in('id', studentIds)
@@ -323,12 +292,21 @@ async function enrichSolutions(admin, completed) {
     studentIds.length
       ? admin.from('team_members').select('user_id, teams!inner(problem_id)').in('user_id', studentIds)
       : Promise.resolve({ data: [] }),
+    problemIds.length
+      ? admin.from('payments').select('submission_id, problem_id, status').in('problem_id', problemIds)
+      : Promise.resolve({ data: [] }),
   ]);
   if (probRes.error) throw new Error(probRes.error.message);
   if (userRes.error) throw new Error(userRes.error.message);
 
   const problemMap = new Map((probRes.data || []).map((p) => [p.id, p]));
   const userMap = new Map((userRes.data || []).map((u) => [u.id, u]));
+  const paymentBySub = new Map();
+  const paidProblems = new Set();
+  for (const pay of payRes.data || []) {
+    paymentBySub.set(pay.submission_id, pay);
+    if (pay.status === 'paid') paidProblems.add(pay.problem_id);
+  }
   const teamKeys = new Set();
   for (const row of teamRes.data || []) {
     const t = Array.isArray(row.teams) ? row.teams[0] : row.teams;
@@ -345,13 +323,20 @@ async function enrichSolutions(admin, completed) {
       problemId: r.problem_id,
       problemTitle: (p && p.title) || 'Unknown problem',
       problemDomain: (p && p.domain) || null,
+      problemPosterId: (p && p.poster_id) || null,
+      rewardAmount: (p && p.reward_amount) ?? null,
+      rewardPaid: paidProblems.has(r.problem_id),
+      paymentStatus: paymentBySub.get(r.id)?.status || null,
       authorId: r.student_id,
-      authorName: (u && u.name) || 'SproutNet builder',
+      authorName: (u && u.name) || 'Solmira builder',
       authorSlug: (u && u.profile_slug) || null,
       participantType,
       score: r.score ?? null,
       feedback: r.judge_feedback ?? null,
-      deliverables: parseDeliverables(r.final_deliverables),
+      preview: r.f_preview || null,
+      // Labels only — file URLs unlock with the full solution (poster/admin).
+      deliverables: parseDeliverables(r.final_deliverables)
+        .map(({ kind, label }) => ({ kind, label })),
       completedAt: r.submitted_at,
     };
   });

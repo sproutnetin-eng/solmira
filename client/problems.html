@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Problems | SproutNet</title>
+<title>Problems | Solmira</title>
 <link rel="stylesheet" href="/assets/styles.css">
 <style>
-  .prob-page { min-height: 100vh; background: #FAF8F4; font-family: 'DM Sans', sans-serif; }
+  .prob-page { min-height: 100vh; background: #FAF8F4; font-family: 'Manrope', sans-serif; }
   .prob-wrap { max-width: 1100px; margin: 0 auto; padding: clamp(32px, 6vw, 52px) clamp(16px, 4vw, 24px); }
   .prob-kicker { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #2D6A4F; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
   .prob-title { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(32px, 7vw, 48px); font-weight: 400; color: #1C1410; letter-spacing: -0.5px; margin: 0 0 12px 0; line-height: 1.1; }
@@ -15,19 +15,25 @@
   .prob-filters { margin-bottom: 36px; }
   .prob-pills { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
   .prob-pills:last-child { margin-bottom: 0; }
-  .pill { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 7px 16px; border-radius: 999px; text-decoration: none; background: #fff; color: #4A3F38; border: 1.5px solid rgba(28,20,16,0.12); }
+  .pill { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 500; padding: 7px 16px; border-radius: 999px; text-decoration: none; background: #fff; color: #4A3F38; border: 1.5px solid rgba(28,20,16,0.12); }
   .pill-domain { padding: 6px 14px; }
   .pill-type-on { background: #1C1410; color: #FAF8F4; border: 1.5px solid #1C1410; }
   .pill-domain-on { background: #2D6A4F; color: #fff; border: 1.5px solid #2D6A4F; }
-  .prob-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .prob-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .prob-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .prob-grid { grid-template-columns: 1fr; } }
   .pcard-link { text-decoration: none; display: block; height: 100%; }
   .pcard { background: #fff; border: 1.5px solid rgba(28,20,16,0.07); border-radius: 14px; height: 100%; display: flex; flex-direction: column; overflow: hidden; transition: box-shadow 0.2s, transform 0.2s; cursor: pointer; box-sizing: border-box; }
   .pcard:hover { box-shadow: 0 8px 28px rgba(28,20,16,0.10); transform: translateY(-2px); }
   .pcard-thumb { aspect-ratio: 16 / 9; background: #F3EEE7; }
   .pcard-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .domain-fb { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; overflow: hidden; }
+  .domain-fb-icon { display: inline-flex; color: rgba(255,255,255,0.9); }
+  .domain-fb-name { font-family: 'Manrope', sans-serif; font-size: 16px; font-weight: 700; color: #fff; letter-spacing: 0.01em; text-shadow: 0 1px 10px rgba(0,0,0,0.45); white-space: nowrap; }
+  .domain-fb-img { position: absolute; inset: 0; }
   .pcard-body { padding: clamp(20px, 3vw, 28px); display: flex; flex-direction: column; gap: 16px; flex: 1; }
   .pbadges { display: flex; gap: 8px; flex-wrap: wrap; }
-  .pbadge { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 999px; }
+  .pbadge { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 999px; }
   .pbadge-domain { color: #2D6A4F; background: #EAF4EE; border: 1px solid rgba(45,106,79,0.15); }
   .pbadge-public { color: #4A3F38; background: rgba(28,20,16,0.05); border: 1px solid rgba(28,20,16,0.1); }
   .pbadge-industry { color: #1E40AF; background: rgba(30,64,175,0.08); border: 1px solid rgba(30,64,175,0.15); }
@@ -36,8 +42,8 @@
   .pbadge-diff-Intermediate { color: #B8860B; background: #FFF8E7; border: 1px solid rgba(184,134,11,0.2); }
   .pbadge-diff-Advanced { color: #C53030; background: #FFF0F0; border: 1px solid rgba(197,48,48,0.2); }
   .pbadge-diff-Expert { color: #7C3AED; background: #F3E8FF; border: 1px solid rgba(124,58,237,0.2); }
-  .pcard-title { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 600; color: #1C1410; line-height: 1.4; margin: 0; }
-  .pcard-snippet { font-family: 'DM Sans', sans-serif; font-size: 13px; color: #4A3F38; font-weight: 300; line-height: 1.6; margin: 0; flex: 1; }
+  .pcard-title { font-family: 'Manrope', sans-serif; font-size: 16px; font-weight: 600; color: #1C1410; line-height: 1.4; margin: 0; }
+  .pcard-snippet { font-family: 'Manrope', sans-serif; font-size: 13px; color: #4A3F38; font-weight: 300; line-height: 1.6; margin: 0; flex: 1; }
   .pfoot { display: flex; gap: 20px; row-gap: 8px; flex-wrap: wrap; padding-top: 14px; border-top: 1px solid rgba(28,20,16,0.06); }
   .pstat { display: flex; flex-direction: column; gap: 2px; }
   .pstat-val { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; color: #1C1410; }
@@ -45,12 +51,12 @@
   .pstat-val-days { color: #F4A723; }
   .pstat-label { font-size: 11px; color: #9CA3A0; text-transform: uppercase; letter-spacing: 0.07em; }
   .pview { margin-left: auto; display: flex; align-items: center; }
-  .pview span { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: #2D6A4F; }
+  .pview span { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; color: #2D6A4F; }
   .pempty, .perror { text-align: center; padding: 80px 24px; background: #fff; border-radius: 12px; border: 1.5px solid rgba(28,20,16,0.07); }
   .perror { border: 1.5px solid rgba(220,38,38,0.12); }
   .pempty-ico, .perror-ico { font-size: 40px; margin-bottom: 16px; }
   .perror-ico { font-size: 36px; }
-  .pempty-title, .perror-title { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 600; color: #1C1410; margin-bottom: 8px; }
+  .pempty-title, .perror-title { font-family: 'Manrope', sans-serif; font-size: 18px; font-weight: 600; color: #1C1410; margin-bottom: 8px; }
   .pempty-sub, .perror-sub { font-size: 14px; color: #9CA3A0; }
 </style>
 </head>
@@ -80,6 +86,7 @@
 <script type="module">
 import { api, esc, renderNav, alertBox } from '/assets/app.js';
 import { icon } from '/assets/icons.js';
+import { domainTheme } from '/assets/domain-themes.js';
 renderNav();
 const DOMAINS = ['All','AI & Data','Climate','Public Infrastructure','Healthcare','Agriculture','Education','Urban Mobility','Civic Technology'];
 const DOMAIN_ICONS = { 'AI & Data': 'cpu', 'Climate': 'leaf', 'Public Infrastructure': 'wrench', 'Healthcare': 'activity', 'Agriculture': 'wheat', 'Education': 'book', 'Urban Mobility': 'bus', 'Civic Technology': 'landmark' };
@@ -104,8 +111,13 @@ function card(p, idx = 0) {
   const snippet = (p.context || '').length > 140 ? `${(p.context || '').slice(0, 140)}...` : (p.context || '');
   const dayClass = days == null || isNaN(days) || closed ? 'pstat-val' : (days <= 7 ? 'pstat-val pstat-val-soon' : 'pstat-val pstat-val-days');
   const eager = idx < 2;
+  const theme = domainTheme(p.domain);
+  const fbIcon = DOMAIN_ICONS[p.domain] ? icon(DOMAIN_ICONS[p.domain], 24) : '';
+  const customImg = (typeof p.thumbnail_url === 'string' && p.thumbnail_url.trim())
+    ? `<img class="domain-fb-img" src="${esc(p.thumbnail_url)}" alt="${esc(p.title)} thumbnail" ${eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async" onerror="this.remove()">`
+    : '';
   return `<a class="pcard-link" href="/problems/${esc(p.id)}"><div class="pcard">
-    ${p.thumbnail_url ? `<div class="pcard-thumb"><img src="${esc(p.thumbnail_url)}" alt="${esc(p.title)} thumbnail" ${eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async"></div>` : ''}
+    <div class="pcard-thumb domain-fb" style="background:${esc(theme)}"><span class="domain-fb-icon">${fbIcon}</span><span class="domain-fb-name">${esc(p.domain || '')}</span>${customImg}</div>
     <div class="pcard-body">
       <div class="pbadges">
         <span class="pbadge pbadge-domain">${DOMAIN_ICONS[p.domain] ? icon(DOMAIN_ICONS[p.domain], 14) + ' ' : ''}${esc(p.domain || '')}</span>
@@ -117,7 +129,7 @@ function card(p, idx = 0) {
       <div class="pfoot">
         <div class="pstat"><span class="${dayClass}">${days == null || isNaN(days) ? '—' : (closed ? 'Closed' : `${days}d`)}</span><span class="pstat-label">${closed ? 'enrollment closed' : 'left'}</span></div>
         <div class="pstat"><span class="pstat-val">${esc(String(p.submission_count ?? 0))}</span><span class="pstat-label">submissions</span></div>
-        <div class="pview"><span>View →</span></div>
+        <div class="pview"><span>View</span> <svg class="arrow-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
       </div>
     </div>
   </div></a>`;

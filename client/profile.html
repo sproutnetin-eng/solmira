@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Profile | SproutNet</title>
+<title>Profile | Solmira</title>
 <link rel="stylesheet" href="/assets/styles.css">
 <style>
   body { background: #FAF8F4; }
-  .p-page { min-height: 100vh; background: #FAF8F4; font-family: 'DM Sans', sans-serif; display: flex; flex-direction: column; }
+  .p-page { min-height: 100vh; background: #FAF8F4; font-family: 'Manrope', sans-serif; display: flex; flex-direction: column; }
   .p-main { flex: 1; }
   .p-row { display: flex; gap: 24px; align-items: flex-start; max-width: 1200px; margin: 0 auto; padding: clamp(24px, 5vw, 44px) clamp(20px, 5vw, 40px) clamp(60px, 8vw, 100px); }
   .p-col { display: flex; flex-direction: column; gap: 18px; flex: 1; min-width: 0; }
@@ -27,7 +27,7 @@
   .p-meta { margin-top: 6px; display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; }
   .p-role { font-size: 11px; font-weight: 600; color: #2D6A4F; background: #EAF4EE; padding: 3px 10px; border-radius: 999px; text-transform: capitalize; }
   .p-dept { font-size: 13px; color: #6B5E52; }
-  .p-edit-btn { margin-top: 12px; padding: 8px 18px; border-radius: 8px; border: 1.5px solid rgba(28,20,16,0.1); background: #fff; font-size: 13px; font-weight: 600; color: #4A3F38; cursor: pointer; width: 100%; font-family: 'DM Sans', sans-serif; }
+  .p-edit-btn { margin-top: 12px; padding: 8px 18px; border-radius: 8px; border: 1.5px solid rgba(28,20,16,0.1); background: #fff; font-size: 13px; font-weight: 600; color: #4A3F38; cursor: pointer; width: 100%; font-family: 'Manrope', sans-serif; }
   .p-stats { background: #fff; border-radius: 14px; border: 1.5px solid rgba(28,20,16,0.06); padding: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .p-stat { text-align: center; }
   .p-stat-v { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; line-height: 1.2; }
@@ -65,16 +65,16 @@
   .p-modal-head h2 { font-size: 18px; font-weight: 600; color: #1C1410; margin: 0; }
   .p-modal-x { background: none; border: none; font-size: 20px; cursor: pointer; color: #9CA3A0; padding: 4px 8px; border-radius: 6px; }
   .p-modal-body { padding: 16px 24px 24px; display: flex; flex-direction: column; gap: 14px; }
-  .p-modal-body label { font-size: 11px; font-weight: 600; color: #6B5E52; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 4px; font-family: 'DM Sans', sans-serif; }
-  .p-modal-body input, .p-modal-body textarea { width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 10px; border: 1.5px solid rgba(28,20,16,0.1); font-size: 14px; color: #1C1410; font-family: 'DM Sans', sans-serif; }
+  .p-modal-body label { font-size: 11px; font-weight: 600; color: #6B5E52; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 4px; font-family: 'Manrope', sans-serif; }
+  .p-modal-body input, .p-modal-body textarea { width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 10px; border: 1.5px solid rgba(28,20,16,0.1); font-size: 14px; color: #1C1410; font-family: 'Manrope', sans-serif; }
   .p-modal-body textarea { resize: none; }
   .p-slug-row { display: flex; align-items: center; gap: 8px; }
   .p-slug-row .prefix { font-size: 13px; color: #9CA3A0; font-family: 'JetBrains Mono', monospace; }
   .p-slug-row input { flex: 1; }
   .p-modal-err { font-size: 13px; color: #DC2626; padding: 8px 12px; background: #FEF2F2; border-radius: 8px; }
   .p-modal-btns { display: flex; gap: 10px; margin-top: 4px; }
-  .p-btn-cancel { flex: 1; padding: 11px 0; border-radius: 10px; border: 1.5px solid rgba(28,20,16,0.1); background: #fff; color: #4A3F38; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
-  .p-btn-save { flex: 1; padding: 11px 0; border-radius: 10px; border: none; background: #1C1410; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .p-btn-cancel { flex: 1; padding: 11px 0; border-radius: 10px; border: 1.5px solid rgba(28,20,16,0.1); background: #fff; color: #4A3F38; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Manrope', sans-serif; }
+  .p-btn-save { flex: 1; padding: 11px 0; border-radius: 10px; border: none; background: #1C1410; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Manrope', sans-serif; }
   .p-btn-save:disabled { background: #D4D0C8; cursor: not-allowed; }
   .p-err { font-size: 13px; color: #DC2626; padding: 8px 12px; background: #FEF2F2; border-radius: 8px; margin-bottom: 12px; }
   .p-loading { color: #4A3F38; padding: 24px 0; text-align: center; }
@@ -124,7 +124,7 @@ function scoreColor(s) { return s >= 7 ? '#2D6A4F' : s >= 4 ? '#F4A723' : '#DC26
 
 function render() {
   const { profile, isOwnProfile, neighbors, myRank, submissions, enrollments } = data;
-  document.title = `${profile.name} | SproutNet`;
+  document.title = `${profile.name} | Solmira`;
   const badges = [];
   if (profile.milestones_done >= 5) badges.push('Deep Thinker');
   if (profile.avg_score >= 8) badges.push('Expert Solver');
@@ -159,6 +159,7 @@ function render() {
       <div class="p-stats">
         ${stats.map(s => `<div class="p-stat"><div class="p-stat-v" style="color:${s.color}">${esc(String(s.value))}</div><div class="p-stat-l">${esc(s.label)}</div></div>`).join('')}
       </div>
+      ${isOwnProfile && ['student', 'mentor'].includes(profile.role) ? `<div class="p-card" id="payout-card"><div class="p-sec-label">Payout details</div><p class="p-bio" style="color:#9CA3A0">Loading payout details…</p></div>` : ''}
     </div>
     <div class="p-col">
       ${myRank ? `<div class="p-card">
@@ -173,7 +174,7 @@ function render() {
             <span class="sc">${esc(String(n.builder_score))}</span>
           </a>`).join('')}
         </div>
-        <a class="p-full" href="/leaderboard">Full Leaderboard →</a>
+        <a class="p-full" href="/leaderboard"><span>Full Leaderboard</span> ${icon('arrowRight', 13)}</a>
       </div>` : ''}
       ${profile.bio ? `<div class="p-card"><div class="p-sec-label">About</div><p class="p-bio">${esc(profile.bio)}</p></div>` : ''}
       ${(socials.length || badges.length) ? `<div class="p-split">
@@ -218,6 +219,43 @@ function render() {
       }
     });
     document.getElementById('edit').addEventListener('click', openEdit);
+  }
+  if (isOwnProfile && ['student', 'mentor'].includes(profile.role)) loadPayoutAccount();
+}
+
+async function loadPayoutAccount() {
+  const card = document.getElementById('payout-card');
+  if (!card) return;
+  try {
+    const { account } = await api('/api/payout-account');
+    card.innerHTML = `<div class="p-sec-label">Payout details</div>
+      <p class="p-bio" style="margin-bottom:12px">${account
+        ? `Rewards will be sent to <strong>${esc(account.upi_id)}</strong> (${esc(account.account_holder_name)}).`
+        : 'Add your UPI ID so Solmira can send rewards you earn.'}</p>
+      <div style="display:grid;gap:8px">
+        <input class="input" id="payout-name" maxlength="80" placeholder="Account holder name" value="${esc(account?.account_holder_name || '')}">
+        <input class="input" id="payout-upi" maxlength="320" placeholder="name@okaxis" value="${esc(account?.upi_id || '')}">
+        <button class="p-edit-btn" style="margin-top:0" id="save-payout">Save payout details</button>
+      </div><div id="payout-message" style="margin-top:10px"></div>`;
+    document.getElementById('save-payout').addEventListener('click', async (event) => {
+      const button = event.currentTarget;
+      button.disabled = true;
+      button.textContent = 'Saving…';
+      try {
+        await api('/api/payout-account', { method: 'POST', body: {
+          account_holder_name: document.getElementById('payout-name').value,
+          upi_id: document.getElementById('payout-upi').value,
+        }});
+        document.getElementById('payout-message').innerHTML = '<div class="p-err" style="color:#15803d">Payout details saved.</div>';
+      } catch (error) {
+        document.getElementById('payout-message').innerHTML = `<div class="p-err">${esc(error.message)}</div>`;
+      } finally {
+        button.disabled = false;
+        button.textContent = 'Save payout details';
+      }
+    });
+  } catch (error) {
+    card.innerHTML = `<div class="p-sec-label">Payout details</div><div class="p-err">${esc(error.message)}</div>`;
   }
 }
 

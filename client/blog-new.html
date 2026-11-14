@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>New Post | SproutNet</title>
+<title>New Post | Solmira</title>
 <link rel="stylesheet" href="/assets/styles.css">
 <style>
-.bloged-wrap { max-width: 860px; margin: 0 auto; padding: clamp(20px, 4vw, 40px) clamp(14px, 3vw, 20px); font-family: 'DM Sans', sans-serif; }
+.bloged-wrap { max-width: 860px; margin: 0 auto; padding: clamp(20px, 4vw, 40px) clamp(14px, 3vw, 20px); font-family: 'Manrope', sans-serif; }
 .bloged-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
 .bloged-head .left { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .bloged-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #2D6A4F; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 4px; }
-.bloged-title { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; color: #1C1410; }
+.bloged-title { font-family: 'Manrope', sans-serif; font-size: 20px; font-weight: 700; color: #1C1410; }
 .mode-toggle { display: inline-flex; background: rgba(28,20,16,0.06); border-radius: 10px; padding: 3px; gap: 2px; }
-.mode-toggle button { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; color: #7A7068; background: transparent; border: none; border-radius: 8px; padding: 7px 16px; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+.mode-toggle button { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; color: #7A7068; background: transparent; border: none; border-radius: 8px; padding: 7px 16px; cursor: pointer; display: flex; align-items: center; gap: 6px; }
 .mode-toggle button.on { color: #1C1410; background: #fff; box-shadow: 0 1px 4px rgba(28,20,16,0.10); }
 .bloged-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-.btn-cancel { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: #5C524A; background: #F6F2EB; border: none; border-radius: 10px; padding: 10px 16px; cursor: pointer; text-decoration: none; }
-.btn-draft { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; color: #1C1410; background: #F6F2EB; border: 1px solid rgba(28,20,16,0.1); border-radius: 10px; padding: 10px 18px; cursor: pointer; }
-.btn-pub { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; color: #1C1410; background: #F4A723; border: none; border-radius: 10px; padding: 10px 20px; cursor: pointer; box-shadow: 0 6px 16px rgba(244,167,35,0.28); }
+.btn-cancel { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; color: #5C524A; background: #F6F2EB; border: none; border-radius: 10px; padding: 10px 16px; cursor: pointer; text-decoration: none; }
+.btn-draft { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; color: #1C1410; background: #F6F2EB; border: 1px solid rgba(28,20,16,0.1); border-radius: 10px; padding: 10px 18px; cursor: pointer; }
+.btn-pub { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; color: #1C1410; background: #F4A723; border: none; border-radius: 10px; padding: 10px 20px; cursor: pointer; box-shadow: 0 6px 16px rgba(244,167,35,0.28); }
 .btn-draft:disabled, .btn-pub:disabled { opacity: 0.6; cursor: not-allowed; }
 .bloged-err { background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.18); border-radius: 12px; padding: 12px 16px; font-size: 13px; color: #B91C1C; margin-bottom: 18px; }
 .bloged-ok { background: rgba(45,106,79,0.08); border: 1px solid rgba(45,106,79,0.2); border-radius: 12px; padding: 12px 16px; font-size: 13px; color: #1B4332; margin-bottom: 18px; font-weight: 600; }
@@ -26,20 +26,20 @@
 .bloged-cover .row { display: flex; gap: 8px; }
 .bloged-cover input[type=file] { flex: 1; font-size: 13px; }
 .post-types { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
-.post-types button { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; border: none; border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+.post-types button { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; border: none; border-radius: 999px; padding: 7px 14px; cursor: pointer; }
 .post-types button.k { color: #2D6A4F; background: #EAF4EE; }
 .post-types button.q { color: #1E40AF; background: rgba(30,64,175,0.08); }
 .post-types button.on { color: #1C1410; background: #F4A723; }
-.bloged-title-input { width: 100%; border: none; border-bottom: 2px solid rgba(28,20,16,0.1); border-radius: 0; padding: 8px 0; font-family: 'Sora', sans-serif; font-size: clamp(22px, 4vw, 32px); font-weight: 700; color: #1C1410; outline: none; resize: none; background: transparent; line-height: 1.25; overflow: hidden; box-sizing: border-box; }
+.bloged-title-input { width: 100%; border: none; border-bottom: 2px solid rgba(28,20,16,0.1); border-radius: 0; padding: 8px 0; font-family: 'Manrope', sans-serif; font-size: clamp(22px, 4vw, 32px); font-weight: 700; color: #1C1410; outline: none; resize: none; background: transparent; line-height: 1.25; overflow: hidden; box-sizing: border-box; }
 .bloged-title-input:focus { border-bottom-color: #2D6A4F; }
 .bloged-meta { background: #fff; border: 1px solid rgba(28,20,16,0.08); border-radius: 14px; padding: 16px; margin: 20px 0; display: grid; gap: 12px; }
 .bloged-meta label { display: flex; flex-direction: column; gap: 5px; font-size: 12px; font-weight: 600; color: #4A3F38; }
-.bloged-meta input, .bloged-meta textarea { font-family: 'DM Sans', sans-serif; font-size: 14px; color: #1C1410; background: #FAF8F4; border: 1.5px solid rgba(28,20,16,0.12); border-radius: 8px; padding: 10px 12px; outline: none; width: 100%; box-sizing: border-box; }
-.bloged-body { width: 100%; font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.7; color: #1C1410; background: #fff; border: 1.5px solid rgba(28,20,16,0.12); border-radius: 12px; padding: 16px; outline: none; box-sizing: border-box; min-height: 280px; resize: vertical; }
+.bloged-meta input, .bloged-meta textarea { font-family: 'Manrope', sans-serif; font-size: 14px; color: #1C1410; background: #FAF8F4; border: 1.5px solid rgba(28,20,16,0.12); border-radius: 8px; padding: 10px 12px; outline: none; width: 100%; box-sizing: border-box; }
+.bloged-body { width: 100%; font-family: 'Manrope', sans-serif; font-size: 15px; line-height: 1.7; color: #1C1410; background: #fff; border: 1.5px solid rgba(28,20,16,0.12); border-radius: 12px; padding: 16px; outline: none; box-sizing: border-box; min-height: 280px; resize: vertical; }
 .bloged-preview-hint { display: flex; align-items: center; gap: 10px; background: rgba(45,106,79,0.06); border: 1px solid rgba(45,106,79,0.14); border-radius: 12px; padding: 10px 16px; margin-bottom: 22px; font-size: 13px; color: #2D6A4F; }
 .bloged-preview-hint button { background: none; border: none; color: #2D6A4F; font-weight: 700; cursor: pointer; padding: 0; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
 .bloged-author { margin-top: 18px; display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: #fff; border-radius: 12px; border: 1px solid rgba(28,20,16,0.07); }
-.bloged-avatar { width: 36px; height: 36px; border-radius: 50%; background: #EAF4EE; color: #2D6A4F; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+.bloged-avatar { width: 36px; height: 36px; border-radius: 50%; background: #EAF4EE; color: #2D6A4F; display: flex; align-items: center; justify-content: center; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; flex-shrink: 0; }
 </style>
 </head>
 <body>

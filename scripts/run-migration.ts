@@ -1,7 +1,9 @@
 // Run: npx tsx scripts/run-migration.ts <sql-file>
+// Requires SUPABASE_DB_URL in .env (the PostgreSQL connection string from
+// Supabase Dashboard > Connect). A service-role API key is not a DB password.
 import { config } from 'dotenv'
 import { resolve } from 'path'
-config({ path: resolve(import.meta.dirname!, '../.env.local') })
+config({ path: resolve(import.meta.dirname!, '../.env') })
 
 import { readFileSync } from 'fs'
 import pg from 'pg'
@@ -14,29 +16,23 @@ if (!sqlFile) {
 
 async function run() {
   const sql = readFileSync(resolve(import.meta.dirname!, '..', sqlFile), 'utf-8')
+  const connectionString = process.env.SUPABASE_DB_URL
+  if (!connectionString) {
+    console.error('Missing SUPABASE_DB_URL in .env. Copy the PostgreSQL connection string from Supabase Dashboard > Connect.')
+    process.exit(1)
+  }
 
-  const pool = new pg.Pool({
-    connectionString: process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  const directPool = new pg.Pool({
+    connectionString,
+    ssl: { rejectUnauthorized: false },
   })
-
-  // Supabase directs: use direct connection string if available
-  // Otherwise, use the Supabase REST API via fetch
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL!
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY!
-
-  // Supabase pg connection
-  const supabaseUrl = new URL(url)
-  const host = supabaseUrl.hostname
-  const dbName = supabaseUrl.hostname.split('.')[0]
-  const directUrl = `postgresql://postgres:${key}@${host}:5432/postgres`
-
-  const directPool = new pg.Pool({ connectionString: directUrl, ssl: { rejectUnauthorized: false } })
 
   try {
     await directPool.query(sql)
-    console.log('✓ Migration applied successfully')
+    console.log('Migration applied successfully')
   } catch (err: any) {
-    console.error('✗ Migration failed:', err.message)
+    console.error('Migration failed:', err.message)
+    process.exitCode = 1
   } finally {
     await directPool.end()
   }

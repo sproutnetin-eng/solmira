@@ -1,6 +1,7 @@
 const express = require('express');
 const { authRequired, loadProfile, requireRole } = require('../middleware/auth');
 const { getAdmin } = require('../supabase');
+const { withPreviewCols } = require('../lib/solution-preview');
 
 const router = express.Router();
 
@@ -102,43 +103,72 @@ router.get('/api/poster/problems/:id/enrollments', ...posterOnly, async (req, re
   } catch (e) { fail(res, e); }
 });
 
-// GET /api/poster/submissions — submissions across all my problems,
-// with the FULL written solution so the poster can review, approve/reject,
-// and score each one. Mirrors the admin judging queue payload.
+// GET /api/poster/submissions — submissions across all my problems.
+// Pre-payment the poster only receives the preview teaser (locked: true);
+// after the reward payment is captured the FULL written solution, per-field
+// files and deliverable URLs are included so the poster can read what they
+// paid for. Admins read the full solution from the admin endpoints.
 router.get('/api/poster/submissions', ...posterOnly, async (req, res) => {
   try {
     const admin = getAdmin();
     const { data: problems } = await admin
       .from('problems')
-      .select('id, title, domain')
+      .select('id, title, domain, reward_amount')
       .eq('poster_id', req.user.id);
     const problemIds = (problems || []).map((p) => p.id);
     if (!problemIds.length) return res.json({ problems: [], submissions: [] });
+    const select = await withPreviewCols(admin,
+      'id, stage, milestone, status, score, submitted_at, problem_id, student_id, participant_type, final_deliverables, judge_feedback, f_understanding, f_rootcause, f_solution, f_impact, f_feasibility, f_risks, f_implementation, problems(title, domain, reward_amount), users:student_id(name, dept, year)');
     const { data, error } = await admin
       .from('submissions')
-      .select('id, stage, milestone, status, score, submitted_at, problem_id, student_id, participant_type, final_deliverables, judge_feedback, f_understanding, f_rootcause, f_solution, f_impact, f_feasibility, f_risks, f_implementation, problems(title, domain), users:student_id(name, dept, year)')
+      .select(select)
       .in('problem_id', problemIds)
       .order('submitted_at', { ascending: false });
     if (error) throw error;
     const rows = data || [];
     const studentIds = Array.from(new Set(rows.map((r) => r.student_id).filter(Boolean)));
     const teamKeys = await getTeamEntryKeys(admin, studentIds);
+    const { data: paidRows } = await admin
+      .from('payments')
+      .select('problem_id')
+      .eq('status', 'paid')
+      .in('problem_id', problemIds);
+    const paidProblems = new Set((paidRows || []).map((p) => p.problem_id));
     // Client reads `created_at`; real column is `submitted_at` — alias it.
-    const submissions = rows.map((s) => ({
-      ...s,
-      created_at: s.submitted_at,
-      participantType: resolveParticipantType(s.participant_type, s.student_id, s.problem_id, teamKeys),
-      deliverables: Array.isArray(s.final_deliverables) ? s.final_deliverables : [],
-      fields: {
-        f_understanding: s.f_understanding || '',
-        f_rootcause: s.f_rootcause || '',
-        f_solution: s.f_solution || '',
-        f_impact: s.f_impact || '',
-        f_feasibility: s.f_feasibility || '',
-        f_risks: s.f_risks || '',
-        f_implementation: s.f_implementation || '',
-      },
-    }));
+    const submissions = rows.map((s) => {
+      // Strip the raw solution columns: when locked, the payload must only
+      // carry the preview (never the full text, files, or deliverable URLs).
+      const {
+        f_preview, f_files, f_understanding, f_rootcause, f_solution, f_impact,
+        f_feasibility, f_risks, f_implementation, final_deliverables, ...rest
+      } = s;
+      // Legacy submissions (written before the preview feature) have no
+      // f_preview and stay fully visible so in-flight reviews keep working.
+      const locked = f_preview != null && !paidProblems.has(s.problem_id);
+      const rawDeliverables = Array.isArray(final_deliverables) ? final_deliverables : [];
+      return {
+        ...rest,
+        created_at: s.submitted_at,
+        participantType: resolveParticipantType(s.participant_type, s.student_id, s.problem_id, teamKeys),
+        preview: f_preview || '',
+        locked,
+        deliverables: locked
+          ? rawDeliverables
+              .filter((d) => d && (d.kind === 'link' || d.kind === 'file'))
+              .map(({ kind, label }) => ({ kind, label }))
+          : rawDeliverables,
+        fieldFiles: locked ? null : (f_files || {}),
+        fields: locked ? null : {
+          f_understanding: f_understanding || '',
+          f_rootcause: f_rootcause || '',
+          f_solution: f_solution || '',
+          f_impact: f_impact || '',
+          f_feasibility: f_feasibility || '',
+          f_risks: f_risks || '',
+          f_implementation: f_implementation || '',
+        },
+      };
+    });
     res.json({ problems: problems || [], submissions });
   } catch (e) { fail(res, e); }
 });
@@ -421,9 +451,18 @@ router.get('/api/admin/solutions', ...adminOnly, async (req, res) => {
     const teamKeys = await getTeamEntryKeys(admin, studentIds);
     const problemMap = new Map();
     const studentMap = new Map();
+    const paymentBySub = new Map();
+    const paidProblems = new Set();
     if (problemIds.length) {
-      const { data: probs } = await admin.from('problems').select('id, title, domain, team_mode').in('id', problemIds);
+      const [{ data: probs }, { data: payments }] = await Promise.all([
+        admin.from('problems').select('id, title, domain, team_mode, poster_id, reward_amount').in('id', problemIds),
+        admin.from('payments').select('submission_id, problem_id, status').in('problem_id', problemIds),
+      ]);
       for (const p of probs || []) problemMap.set(p.id, p);
+      for (const pay of payments || []) {
+        paymentBySub.set(pay.submission_id, pay);
+        if (pay.status === 'paid') paidProblems.add(pay.problem_id);
+      }
     }
     if (studentIds.length) {
       const { data: users } = await admin.from('users').select('id, name, dept, year').in('id', studentIds);
@@ -447,6 +486,10 @@ router.get('/api/admin/solutions', ...adminOnly, async (req, res) => {
           problemTitle: p.title || 'Unknown problem', problemDomain: p.domain || null,
           problemId: r.problem_id, studentName: s.name || 'Unknown student',
           studentDept: s.dept || null, studentYear: s.year || null,
+          problemPosterId: p.poster_id || null,
+          rewardAmount: p.reward_amount ?? null,
+          rewardPaid: paidProblems.has(r.problem_id),
+          paymentStatus: paymentBySub.get(r.id)?.status || null,
         };
       }),
     });

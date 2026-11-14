@@ -1,12 +1,14 @@
 {
-  "name": "sproutnet",
+  "name": "solmira",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "node server/server.js",
     "serve:dev": "node --watch server/server.js",
+    "db:migrate": "tsx scripts/run-migration.ts",
     "seed:mentors": "npx tsx scripts/seed-mentors.ts",
-    "seed:test": "npx tsx scripts/seed-test-data.ts"
+    "seed:test": "npx tsx scripts/seed-test-data.ts",
+    "seed:users": "npx tsx scripts/seed-users.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.98.0",
@@ -16,7 +18,8 @@
     "express": "^4.21.2",
     "multer": "^2.0.2",
     "nodemailer": "^9.0.5",
-    "pg": "^8.22.0"
+    "pg": "^8.22.0",
+    "razorpay": "^2.9.8"
   },
   "devDependencies": {
     "tsx": "^4.0.0"

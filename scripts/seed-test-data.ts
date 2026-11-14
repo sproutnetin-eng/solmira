@@ -20,7 +20,7 @@ async function main() {
   const { data: existingPoster } = await admin
     .from('users')
     .select('id, role')
-    .eq('email', 'poster@sproutnet.test')
+    .eq('email', 'poster@solmira.test')
     .maybeSingle()
 
   if (existingPoster) {
@@ -28,7 +28,7 @@ async function main() {
     console.log('  ↻ Poster already exists')
   } else {
     const { data: authUser, error: authErr } = await admin.auth.admin.createUser({
-      email: 'poster@sproutnet.test',
+      email: 'poster@solmira.test',
       password: 'Test@123',
       email_confirm: true,
       user_metadata: { name: 'Test Poster', role: 'poster' }
@@ -39,7 +39,7 @@ async function main() {
     }
     posterId = authUser.user.id
     await admin.from('users').upsert({
-      id: posterId, email: 'poster@sproutnet.test', name: 'Test Poster', role: 'poster'
+      id: posterId, email: 'poster@solmira.test', name: 'Test Poster', role: 'poster'
     }, { onConflict: 'id' })
     console.log('  ✓ Poster created')
   }
@@ -95,7 +95,7 @@ async function main() {
   const { data: existingLeader } = await admin
     .from('users')
     .select('id')
-    .eq('email', 'leader@sproutnet.test')
+    .eq('email', 'leader@solmira.test')
     .maybeSingle()
 
   if (existingLeader) {
@@ -103,7 +103,7 @@ async function main() {
     console.log('  ↻ Leader already exists')
   } else {
     const { data: authUser, error: authErr } = await admin.auth.admin.createUser({
-      email: 'leader@sproutnet.test',
+      email: 'leader@solmira.test',
       password: 'Test@123',
       email_confirm: true,
       user_metadata: { name: 'Team Leader', role: 'student' }
@@ -114,7 +114,7 @@ async function main() {
     }
     leaderId = authUser.user.id
     await admin.from('users').upsert({
-      id: leaderId, email: 'leader@sproutnet.test', name: 'Team Leader', role: 'student',
+      id: leaderId, email: 'leader@solmira.test', name: 'Team Leader', role: 'student',
       dept: 'Computer Science', year: '3rd Year'
     }, { onConflict: 'id' })
     console.log('  ✓ Team leader created')
@@ -124,14 +124,14 @@ async function main() {
   const { data: existingAdmin } = await admin
     .from('users')
     .select('id')
-    .eq('email', 'admin@sproutnet.test')
+    .eq('email', 'admin@solmira.test')
     .maybeSingle()
 
   if (existingAdmin) {
     console.log('  ↻ Admin already exists')
   } else {
     const { data: authUser, error: authErr } = await admin.auth.admin.createUser({
-      email: 'admin@sproutnet.test',
+      email: 'admin@solmira.test',
       password: 'Test@123',
       email_confirm: true,
       user_metadata: { name: 'Test Admin', role: 'admin' }
@@ -140,7 +140,7 @@ async function main() {
       console.error('  ✗ Failed to create admin auth user:', authErr?.message)
     } else {
       await admin.from('users').upsert({
-        id: authUser.user.id, email: 'admin@sproutnet.test', name: 'Test Admin', role: 'admin'
+        id: authUser.user.id, email: 'admin@solmira.test', name: 'Test Admin', role: 'admin'
       }, { onConflict: 'id' })
       console.log('  ✓ Admin created')
     }
@@ -150,14 +150,14 @@ async function main() {
   const { data: existingStudent } = await admin
     .from('users')
     .select('id')
-    .eq('email', 'student@sproutnet.test')
+    .eq('email', 'student@solmira.test')
     .maybeSingle()
 
   if (existingStudent) {
     console.log('  ↻ Regular student already exists')
   } else {
     const { data: authUser, error: authErr } = await admin.auth.admin.createUser({
-      email: 'student@sproutnet.test',
+      email: 'student@solmira.test',
       password: 'Test@123',
       email_confirm: true,
       user_metadata: { name: 'Test Student', role: 'student' }
@@ -166,7 +166,7 @@ async function main() {
       console.error('  ✗ Failed to create student auth user:', authErr?.message)
     } else {
       await admin.from('users').upsert({
-        id: authUser.user.id, email: 'student@sproutnet.test', name: 'Test Student', role: 'student',
+        id: authUser.user.id, email: 'student@solmira.test', name: 'Test Student', role: 'student',
         dept: 'Information Science', year: '2nd Year'
       }, { onConflict: 'id' })
       console.log('  ✓ Regular student created')
@@ -174,7 +174,7 @@ async function main() {
   }
 
   // 3d. Enroll both test students in the test problem so they can upload solutions
-  for (const email of ['leader@sproutnet.test', 'student@sproutnet.test']) {
+  for (const email of ['leader@solmira.test', 'student@solmira.test']) {
     const { data: u } = await admin
       .from('users')
       .select('id')
@@ -209,13 +209,13 @@ async function main() {
     }
   }
 
-  // 3e. Create an APPROVED submission for student@sproutnet.test
+  // 3e. Create an APPROVED submission for student@solmira.test
   // so the Stage-2 final upload page can be tested immediately.
   {
     const { data: u } = await admin
       .from('users')
       .select('id')
-      .eq('email', 'student@sproutnet.test')
+      .eq('email', 'student@solmira.test')
       .maybeSingle()
 
     if (u) {
@@ -251,7 +251,7 @@ async function main() {
         if (subErr) {
           console.error('  ✗ Failed to create approved submission:', subErr.message)
         } else {
-          console.log('  ✓ Approved (Stage-1) submission created for student@sproutnet.test')
+          console.log('  ✓ Approved (Stage-1) submission created for student@solmira.test')
         }
       } else {
         console.log('  ↻ Approved submission already exists')
@@ -293,7 +293,7 @@ async function main() {
     const { data: leader } = await admin
       .from('users')
       .select('id')
-      .eq('email', 'leader@sproutnet.test')
+      .eq('email', 'leader@solmira.test')
       .maybeSingle()
 
     const { data: existingLeaderSub } = await admin
@@ -331,14 +331,14 @@ async function main() {
       if (subErr) {
         console.error('  ✗ Failed to create team submission:', subErr.message)
       } else {
-        console.log('  ✓ Completed TEAM submission created for leader@sproutnet.test')
+        console.log('  ✓ Completed TEAM submission created for leader@solmira.test')
       }
     } else {
       console.log('  ↻ Team submission already exists')
     }
   }
 
-  // 3f. Create a SECOND problem enrolled by student@sproutnet.test with NO submission,
+  // 3f. Create a SECOND problem enrolled by student@solmira.test with NO submission,
   // so the same account can also test a fresh Stage-1 submission.
   {
     const { data: existingSecond } = await admin
@@ -390,7 +390,7 @@ async function main() {
       const { data: u } = await admin
         .from('users')
         .select('id')
-        .eq('email', 'student@sproutnet.test')
+        .eq('email', 'student@solmira.test')
         .maybeSingle()
 
       if (u) {
@@ -408,7 +408,7 @@ async function main() {
           if (e2 && !String(e2.message).includes('duplicate')) {
             console.error('  ✗ Failed to enroll student in second problem:', e2.message)
           } else {
-            console.log('  ✓ student@sproutnet.test enrolled in second problem (no submission yet)')
+            console.log('  ✓ student@solmira.test enrolled in second problem (no submission yet)')
           }
         } else {
           console.log('  ↻ Already enrolled in second problem')
@@ -435,7 +435,7 @@ async function main() {
         problem_id: problemId,
         leader_id: leaderId,
         name: 'Campus Coders',
-        invite_code: 'SPROUT-TEST01'
+        invite_code: 'SOLMIRA-TEST01'
       })
       .select()
       .single()
@@ -510,9 +510,9 @@ async function main() {
   }
 
   console.log('\nDone! Login credentials:')
-  console.log('  Student (in team): leader@sproutnet.test / Test@123')
+  console.log('  Student (in team): leader@solmira.test / Test@123')
   console.log('  Test problem:       Build a Smart Campus Navigation App (team_mode=both)')
-  console.log('  Team invite code:   SPROUT-TEST01')
+  console.log('  Team invite code:   SOLMIRA-TEST01')
 }
 
 main()

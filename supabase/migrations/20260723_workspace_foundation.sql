@@ -1,4 +1,4 @@
--- SproutNet Migration: Workspace Foundation — Phase 1
+-- Solmira Migration: Workspace Foundation — Phase 1
 -- Date: 2026-07-23
 -- 
 -- Extends existing schema to make Workspace the central collaboration entity.

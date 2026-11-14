@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Blogs | SproutNet</title>
+<title>Blogs | Solmira</title>
 <link rel="stylesheet" href="/assets/styles.css">
 <style>
-  .blogs-page { min-height: 100vh; background: #FAF8F4; font-family: 'DM Sans', sans-serif; }
+  .blogs-page { min-height: 100vh; background: #FAF8F4; font-family: 'Manrope', sans-serif; }
   .blogs-wrap { max-width: 1180px; margin: 0 auto; padding: clamp(32px, 6vw, 52px) clamp(16px, 4vw, 24px); }
   .blogs-hero { background: linear-gradient(135deg, #1C1410 0%, #2B211B 52%, #2D6A4F 100%); border-radius: 24px; padding: clamp(24px, 5vw, 40px); margin-bottom: 28px; color: #FAF8F4; position: relative; overflow: hidden; }
   .blogs-hero-glow { position: absolute; inset: auto -40px -50px auto; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(244,167,35,0.24) 0%, rgba(244,167,35,0) 70%); }
@@ -15,8 +15,8 @@
   .blogs-hero h1 { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(34px, 7vw, 58px); font-weight: 400; line-height: 1.02; letter-spacing: -0.7px; margin: 0 0 16px; }
   .blogs-hero p { font-size: 16px; line-height: 1.75; color: rgba(250,248,244,0.78); max-width: 620px; margin: 0; }
   .blogs-hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
-  .blogs-btn-solid { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; color: #1C1410; background: #F4A723; padding: 10px 18px; border-radius: 10px; text-decoration: none; }
-  .blogs-btn-ghost { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: #FAF8F4; background: rgba(250,248,244,0.18); border: 1px solid rgba(250,248,244,0.35); padding: 10px 18px; border-radius: 10px; text-decoration: none; }
+  .blogs-btn-solid { font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; color: #1C1410; background: #F4A723; padding: 10px 18px; border-radius: 10px; text-decoration: none; }
+  .blogs-btn-ghost { font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600; color: #FAF8F4; background: rgba(250,248,244,0.18); border: 1px solid rgba(250,248,244,0.35); padding: 10px 18px; border-radius: 10px; text-decoration: none; }
   .blogs-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.8fr); gap: 24px; align-items: start; }
   @media (max-width: 980px) { .blogs-layout { grid-template-columns: 1fr; } }
   .blogs-feed { display: grid; gap: 18px; }
@@ -27,17 +27,17 @@
   .blogs-cover img { width: 100%; height: 100%; object-fit: cover; }
   .blogs-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
   .blogs-author { display: flex; gap: 14px; min-width: 0; }
-  .blogs-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; flex-shrink: 0; }
+  .blogs-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; flex-shrink: 0; }
   .blogs-avatar.knowledge { background: #EAF4EE; color: #2D6A4F; }
   .blogs-avatar.question { background: rgba(30,64,175,0.08); color: #1E40AF; }
-  .blogs-author-name { font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; color: #1C1410; }
+  .blogs-author-name { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: #1C1410; }
   .blogs-type-pill { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 4px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.08em; }
   .blogs-type-pill.knowledge { color: #2D6A4F; background: #EAF4EE; }
   .blogs-type-pill.question { color: #1E40AF; background: rgba(30,64,175,0.08); }
   .blogs-author-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
   .blogs-date { font-size: 12px; color: #7A7068; }
   .blogs-counts { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6A5F58; background: #F6F2EB; padding: 6px 10px; border-radius: 999px; white-space: nowrap; }
-  .blogs-card h2 { font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 700; color: #1C1410; line-height: 1.2; margin: 0 0 12px; }
+  .blogs-card h2 { font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 700; color: #1C1410; line-height: 1.2; margin: 0 0 12px; }
   .blogs-excerpt { font-size: 15px; color: #3F352E; line-height: 1.8; white-space: pre-wrap; margin: 0; }
   .blogs-side { display: grid; gap: 18px; }
   .blogs-side-card { background: #fff; border: 1.5px solid rgba(28,20,16,0.07); border-radius: 18px; padding: 22px; }
@@ -48,18 +48,18 @@
   .blogs-snap-val { font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; }
   .blogs-tips { background: linear-gradient(135deg, #1C1410 0%, #2D6A4F 100%); border-radius: 18px; padding: 22px; color: #FAF8F4; }
   .blogs-tips-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(250,248,244,0.42); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
-  .blogs-tips h3 { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; margin: 0 0 14px; }
+  .blogs-tips h3 { font-family: 'Manrope', sans-serif; font-size: 18px; font-weight: 700; margin: 0 0 14px; }
   .blogs-tips p { font-size: 13px; line-height: 1.7; color: rgba(250,248,244,0.78); margin: 0 0 12px; }
   .blogs-tips p:last-child { margin-bottom: 0; }
   .blogs-cta-card { background: #F6F2EB; border-radius: 18px; padding: 22px; border: 1px solid rgba(28,20,16,0.06); }
-  .blogs-cta-card h3 { font-family: 'Sora', sans-serif; font-size: 17px; font-weight: 700; color: #1C1410; margin: 0 0 10px; }
+  .blogs-cta-card h3 { font-family: 'Manrope', sans-serif; font-size: 17px; font-weight: 700; color: #1C1410; margin: 0 0 10px; }
   .blogs-cta-card p { font-size: 13px; color: #5C524A; line-height: 1.7; margin: 0 0 16px; }
   .blogs-err-card { background: #fff; border: 1.5px solid rgba(220,38,38,0.12); border-radius: 18px; padding: 24px; }
-  .blogs-err-title { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; color: #1C1410; margin-bottom: 8px; }
+  .blogs-err-title { font-family: 'Manrope', sans-serif; font-size: 18px; font-weight: 700; color: #1C1410; margin-bottom: 8px; }
   .blogs-err-body { font-size: 14px; color: #6A5F58; line-height: 1.7; }
   .blogs-err-detail { font-size: 12px; color: #B91C1C; margin-top: 10px; }
   .blogs-empty { background: #fff; border: 1.5px solid rgba(28,20,16,0.07); border-radius: 18px; padding: 42px 28px; text-align: center; }
-  .blogs-empty h2 { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; color: #1C1410; margin: 0 0 8px; }
+  .blogs-empty h2 { font-family: 'Manrope', sans-serif; font-size: 20px; font-weight: 700; color: #1C1410; margin: 0 0 8px; }
   .blogs-empty p { font-size: 14px; color: #6A5F58; line-height: 1.7; margin: 0; }
 </style>
 </head>
@@ -107,7 +107,7 @@ document.getElementById('blog-cta').innerHTML = session
   ? `<a class="blogs-btn-solid" href="/blogs/manage">Write and manage posts</a>`
   : `<a class="blogs-btn-solid" href="/login">Log in to post</a><a class="blogs-btn-ghost" href="/join">Create account</a>`;
 document.getElementById('blogs-side-cta').innerHTML = session
-  ? `<h3>Posting as a builder</h3><p>Your posts and comments publish under your SproutNet account and become visible to everyone on this page.</p><a class="blogs-btn-solid" href="/dashboard">Go to dashboard -&gt;</a>`
+  ? `<h3>Posting as a builder</h3><p>Your posts and comments publish under your Solmira account and become visible to everyone on this page.</p><a class="blogs-btn-solid" href="/dashboard">Go to dashboard -&gt;</a>`
   : `<h3>Need your own feed presence?</h3><p>Sign in to publish a post, react to ideas, and answer questions from other builders.</p><a class="blogs-btn-solid" href="/login">Log in -&gt;</a>`;
 const plain = (body) => { try { const t = body.trim();
     if (t.startsWith('{')) { const j = JSON.parse(t);
@@ -132,7 +132,7 @@ try {
       <div class="blogs-card-top">
         <div class="blogs-author">
           <div class="blogs-avatar ${cls}">${esc(aini)}</div>
-          <div><div class="blogs-author-row"><span class="blogs-author-name">${esc(p.author?.name || 'SproutNet member')}</span><span class="blogs-type-pill ${cls}">${esc(meta)}</span></div>
+          <div><div class="blogs-author-row"><span class="blogs-author-name">${esc(p.author?.name || 'Solmira member')}</span><span class="blogs-type-pill ${cls}">${esc(meta)}</span></div>
           <div class="blogs-date">${esc(fmtRole(p.author?.role))} - ${esc(new Date(p.createdAt).toLocaleString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit' }))}</div></div>
         </div>
         <div class="blogs-counts">${esc(String(p.commentsCount ?? 0))} comment${(p.commentsCount ?? 0) === 1 ? '' : 's'} · ${esc(String(p.likesCount ?? 0))} like${(p.likesCount ?? 0) === 1 ? '' : 's'}</div>

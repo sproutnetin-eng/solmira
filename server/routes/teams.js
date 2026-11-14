@@ -80,8 +80,8 @@ router.post('/api/teams/create', authRequired, async (req, res) => {
     return res.status(403).json({ error: enrollment.error });
   }
 
-  // Generate unique invite code (e.g. SPROUT-8CHAR)
-  const inviteCode = `SPROUT-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+  // Generate unique invite code (e.g. SOLMIRA-8CHAR)
+  const inviteCode = `SOLMIRA-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
 
   // Insert Team
   const { data: team, error: teamErr } = await admin

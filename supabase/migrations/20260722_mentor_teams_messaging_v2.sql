@@ -1,4 +1,4 @@
--- SproutNet Migration: Mentor Ecosystem, Workspaces, Generalized Messaging & Notifications (v2)
+-- Solmira Migration: Mentor Ecosystem, Workspaces, Generalized Messaging & Notifications (v2)
 -- Date: 2026-07-22
 
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";

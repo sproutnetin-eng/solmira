@@ -3,32 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Blogs | SproutNet</title>
+<title>My Blogs | Solmira</title>
 <link rel="stylesheet" href="/assets/styles.css">
 <style>
 .manage-wrap { max-width: 1180px; margin: 0 auto; padding: clamp(32px, 6vw, 52px) clamp(16px, 4vw, 24px); }
 .manage-hero { background: #fff; border-radius: 24px; padding: clamp(20px, 4vw, 32px); margin-bottom: 24px; border: 1px solid rgba(28,20,16,0.08); }
 .manage-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #2D6A4F; margin-bottom: 10px; }
 .manage-hero-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
-.manage-hero-t { font-family: 'Sora', sans-serif; font-size: 24px; font-weight: 700; color: #1C1410; margin-bottom: 6px; }
+.manage-hero-t { font-family: 'Manrope', sans-serif; font-size: 24px; font-weight: 700; color: #1C1410; margin-bottom: 6px; }
 .manage-hero-d { font-size: 14px; color: #5C524A; }
 .manage-hero-btns { display: flex; gap: 8px; flex-wrap: wrap; }
-.btn-write { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; color: #1C1410; background: #F4A723; padding: 10px 18px; border-radius: 10px; text-decoration: none; box-shadow: 0 4px 14px rgba(244,167,35,0.24); }
-.btn-feed { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; color: #1C1410; background: #F6F2EB; padding: 10px 16px; border-radius: 10px; text-decoration: none; border: 1px solid rgba(28,20,16,0.08); }
+.btn-write { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; color: #1C1410; background: #F4A723; padding: 10px 18px; border-radius: 10px; text-decoration: none; box-shadow: 0 4px 14px rgba(244,167,35,0.24); }
+.btn-feed { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; color: #1C1410; background: #F6F2EB; padding: 10px 16px; border-radius: 10px; text-decoration: none; border: 1px solid rgba(28,20,16,0.08); }
 .blogs-manage-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.9fr); gap: 24px; align-items: start; }
 @media (max-width: 980px) { .blogs-manage-layout, .blogs-layout { grid-template-columns: 1fr; } }
 .mypanel { background: #fff; border-radius: 20px; padding: 22px; border: 1px solid rgba(28,20,16,0.08); box-shadow: 0 10px 24px rgba(28,20,16,0.05); }
 .mypanel .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #2D6A4F; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
-.mypanel .t { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; color: #1C1410; margin-bottom: 10px; }
+.mypanel .t { font-family: 'Manrope', sans-serif; font-size: 18px; font-weight: 700; color: #1C1410; margin-bottom: 10px; }
 .mypanel .d { font-size: 13px; color: #6A5F58; line-height: 1.7; margin-bottom: 18px; }
 .post-card { border: 1px solid rgba(28,20,16,0.06); border-radius: 14px; padding: 14px 16px; background: #FAF8F4; margin-bottom: 12px; }
 .post-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
-.post-title { font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700; color: #1C1410; line-height: 1.3; }
+.post-title { font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; color: #1C1410; line-height: 1.3; }
 .post-meta { font-size: 12px; color: #6A5F58; margin-top: 4px; }
 .post-type { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: #EAF4EE; color: #2D6A4F; }
 .post-type.q { background: rgba(30,64,175,0.1); color: #1E40AF; }
 .post-btns { display: flex; gap: 8px; flex-wrap: wrap; }
-.pbtn { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700; border: none; border-radius: 999px; padding: 6px 10px; cursor: pointer; }
+.pbtn { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 700; border: none; border-radius: 999px; padding: 6px 10px; cursor: pointer; }
 .pbtn.comments { color: #2D6A4F; background: rgba(45,106,79,0.12); }
 .pbtn.likes { color: #1E40AF; background: rgba(30,64,175,0.12); }
 .pbtn.edit { color: #1C1410; background: #F4A723; }
@@ -36,11 +36,11 @@
 .pbtn.save { color: #FAF8F4; background: #2D6A4F; border-radius: 999px; padding: 8px 12px; }
 .pbtn.cancel { color: #1C1410; background: #F6F2EB; border-radius: 999px; padding: 8px 12px; }
 .post-body { font-size: 13px; color: #3F352E; line-height: 1.7; white-space: pre-wrap; }
-.post-edit input, .post-edit textarea { width: 100%; border: 1px solid rgba(28,20,16,0.12); border-radius: 10px; padding: 10px 12px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: #1C1410; outline: none; box-sizing: border-box; }
+.post-edit input, .post-edit textarea { width: 100%; border: 1px solid rgba(28,20,16,0.12); border-radius: 10px; padding: 10px 12px; font-family: 'Manrope', sans-serif; font-size: 14px; color: #1C1410; outline: none; box-sizing: border-box; }
 .post-edit textarea { border-radius: 12px; line-height: 1.6; }
 .post-edit .row { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; margin-top: 10px; }
 .side-box { margin-top: 12px; background: #fff; border-radius: 12px; padding: 12px; font-size: 12px; color: #7A7068; }
-.like-chip { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #1C1410; background: #F6F2EB; padding: 6px 10px; border-radius: 999px; }
+.like-chip { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; color: #1C1410; background: #F6F2EB; padding: 6px 10px; border-radius: 999px; }
 .manage-err { background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.15); border-radius: 12px; padding: 12px 14px; font-size: 12px; color: #B91C1C; margin-bottom: 14px; }
 </style>
 </head>

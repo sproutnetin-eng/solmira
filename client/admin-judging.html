@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Judging Queue — SproutNet Admin</title>
+<title>Judging Queue — Solmira Admin</title>
 <link rel="stylesheet" href="/assets/styles.css">
 <style>
   .admin-theme { --bg-main: #F6F7F8; --bg-surface: #FFFFFF; --bg-card: #FFFFFF; --bg-hover: #F0F2F4; --border-primary: #E5E7EB; --border-secondary: #D1D5DB; --border-input: #D1D5DB; --text-primary: #000000; --text-secondary: #000000; --text-muted: #000000; --text-disabled: #000000; --accent-primary: #10A37F; --accent-hover: #1DBF93; --danger: #EF4444; --warning: #F59E0B; background: var(--bg-main); color: var(--text-primary); }
   .admin-theme * { box-sizing: border-box; color: #000000 !important; }
   .admin-theme ::placeholder { color: #000000 !important; opacity: 0.55; }
-  .admin-shell { min-height: 100vh; background: var(--bg-main); color: var(--text-primary); font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; --admin-columns: 260px 1fr; --admin-aside-position: sticky; --admin-aside-height: 100vh; }
+  .admin-shell { min-height: 100vh; background: var(--bg-main); color: var(--text-primary); font-family: 'Manrope', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; --admin-columns: 260px 1fr; --admin-aside-position: sticky; --admin-aside-height: 100vh; }
   .admin-grid { display: grid; grid-template-columns: var(--admin-columns, 260px 1fr); min-height: 100vh; }
   .admin-sidebar { border-right: 1px solid var(--border-primary); background: var(--bg-surface); padding: clamp(16px, 3vw, 22px) clamp(14px, 3vw, 18px); position: var(--admin-aside-position, sticky); top: 0; height: var(--admin-aside-height, 100vh); overflow-y: auto; }
   .admin-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 18px; }
@@ -24,18 +24,18 @@
   .admin-sidebar-link { text-decoration: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; border-radius: 12px; background: var(--bg-surface); border: 1px solid var(--border-primary); }
   .admin-sidebar-link--active { background: var(--bg-hover); border-color: var(--border-secondary); box-shadow: inset 3px 0 0 var(--accent-primary); }
   .admin-links { display: grid; gap: 8px; }
-  .admin-links .t { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 800; }
+  .admin-links .t { font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 800; }
   .admin-links .m { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
   .admin-tools { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-primary); display: grid; gap: 6px; }
   .admin-tools .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-  .admin-tools button { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; background: transparent; border: 1px solid var(--border-primary); border-radius: 8px; padding: 8px 12px; cursor: pointer; text-align: left; }
+  .admin-tools button { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; background: transparent; border: 1px solid var(--border-primary); border-radius: 8px; padding: 8px 12px; cursor: pointer; text-align: left; }
   .admin-tools button:disabled { cursor: not-allowed; opacity: 0.6; }
   .admin-tools .tmsg { font-size: 11px; font-family: 'JetBrains Mono', monospace; line-height: 1.4; }
   .admin-back { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(148,163,184,0.12); }
   .admin-back a { justify-content: center; }
   .admin-pill { font-family: "JetBrains Mono", monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--border-secondary); background: var(--bg-hover); }
   .admin-pill--accent { border-color: rgba(16,163,127,0.35); background: rgba(16,163,127,0.12); }
-  .admin-btn { font-family: "DM Sans", sans-serif; font-size: 12px; font-weight: 800; border-radius: 12px; padding: 8px 10px; cursor: pointer; border: 1px solid var(--border-secondary); background: var(--bg-surface); }
+  .admin-btn { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 800; border-radius: 12px; padding: 8px 10px; cursor: pointer; border: 1px solid var(--border-secondary); background: var(--bg-surface); }
   .admin-btn:disabled { cursor: not-allowed; opacity: 0.6; }
   .admin-linkbtn { text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
   .admin-table { overflow: hidden; overflow-x: auto; border-radius: 16px; border: 1px solid var(--border-primary); background: var(--bg-surface); }
@@ -44,7 +44,7 @@
   .jg-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
   .jg-title { font-family: Sora, sans-serif; font-size: clamp(22px, 4.5vw, 28px); font-weight: 950; letter-spacing: -0.6px; margin: 0 0 8px; }
   .jg-sub { font-size: 14px; font-weight: 500; margin: 0 0 16px; }
-  .jg-note { margin-top: 18px; font-family: 'DM Sans', sans-serif; font-size: 12px; }
+  .jg-note { margin-top: 18px; font-family: 'Manrope', sans-serif; font-size: 12px; }
   .jg-empty { text-align: center; padding: 80px 24px; background: var(--bg-surface); border-radius: 18px; border: 1px solid var(--border-primary); }
   .jg-empty .big { font-size: 40px; margin-bottom: 16px; }
   .jg-empty .t { font-family: Sora, sans-serif; font-size: 18px; font-weight: 900; margin-bottom: 8px; }
@@ -56,8 +56,8 @@
   .jg-row { padding: 13px 14px; cursor: pointer; }
   .jg-row.open { background: var(--bg-hover); }
   .jg-pt { font-family: Sora, sans-serif; font-size: 13px; font-weight: 900; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .jg-sn { font-family: 'DM Sans', sans-serif; font-size: 11px; margin-top: 2px; }
-  .jg-dom { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .jg-sn { font-family: 'Manrope', sans-serif; font-size: 11px; margin-top: 2px; }
+  .jg-dom { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .jg-entry { display: inline-block; justify-self: start; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; padding: 4px 9px; border-radius: 999px; text-transform: uppercase; }
   .jg-entry.team { background: rgba(96,165,250,0.12); border: 1px solid rgba(96,165,250,0.35); }
   .jg-entry.indiv { background: rgba(45,212,191,0.12); border: 1px solid rgba(45,212,191,0.35); }
@@ -66,14 +66,14 @@
   .jg-judge { border: 1px solid rgba(244,167,35,0.35); background: rgba(244,167,35,0.05); border-radius: 14px; padding: 16px; display: grid; gap: 12px; }
   .jg-judge .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
   .jg-judge .cap { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; }
-  .jg-judge .meta { font-family: 'DM Sans', sans-serif; font-size: 11px; }
+  .jg-judge .meta { font-family: 'Manrope', sans-serif; font-size: 11px; }
   .jg-scores { display: flex; gap: 5px; flex-wrap: wrap; }
   .jg-scores button { width: 34px; height: 34px; border-radius: 8px; border: 1.5px solid var(--border-input); background: #1A1A1A; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; cursor: pointer; }
   .jg-scores button.on { border-color: #F4A723; background: rgba(244,167,35,0.15); }
-  .jg-fb { width: 100%; box-sizing: border-box; background: #1A1A1A; border: 1px solid var(--border-input); border-radius: 10px; padding: 10px 12px; font-size: 13px; resize: vertical; font-family: 'DM Sans', sans-serif; outline: none; }
+  .jg-fb { width: 100%; box-sizing: border-box; background: #1A1A1A; border: 1px solid var(--border-input); border-radius: 10px; padding: 10px 12px; font-size: 13px; resize: vertical; font-family: 'Manrope', sans-serif; outline: none; }
   .jg-err { font-size: 12px; font-family: 'JetBrains Mono', monospace; }
   .jg-verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .jg-verdict button { padding: 11px 0; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 800; cursor: pointer; }
+  .jg-verdict button { padding: 11px 0; border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 800; cursor: pointer; }
   .jg-reject { background: rgba(239,68,68,0.14); border: 1px solid rgba(239,68,68,0.45); }
   .jg-approve { background: rgba(52,211,153,0.16); border: 1px solid rgba(52,211,153,0.5); }
   .jg-verdict button:disabled { cursor: not-allowed; }
@@ -81,10 +81,10 @@
   .jg-sec { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
   .jg-link { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-radius: 8px; border: 1px solid var(--border-primary); text-decoration: none; }
   .jg-link .k { font-family: 'JetBrains Mono', monospace; font-size: 10px; }
-  .jg-link .t { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .jg-link .t { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .jg-link .go { margin-left: auto; font-size: 11px; }
   .jg-flabel { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px; }
-  .jg-fbody { font-family: 'DM Sans', sans-serif; font-size: 13px; line-height: 1.65; }
+  .jg-fbody { font-family: 'Manrope', sans-serif; font-size: 13px; line-height: 1.65; }
   .jg-na { font-size: 12px; font-style: italic; }
   @media (max-width: 1024px) { .admin-shell { --admin-columns: 1fr; --admin-aside-position: static; --admin-aside-height: auto; } }
 </style>
@@ -96,7 +96,7 @@
   <aside class="admin-sidebar">
     <a class="admin-brand" href="/admin">
       <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect width="34" height="34" rx="8" fill="#10A37F"/><line x1="17" y1="27" x2="17" y2="15" stroke="#0D0D0D" stroke-width="1.7" stroke-linecap="round"/><path d="M17 21 C16 19 13 18 11 14.5 C11 14.5 15.5 13 17 17.5" fill="#F59E0B"/><path d="M17 18 C18 15.5 21.5 14 24 10.5 C24 10.5 19.5 10 17 14.5" fill="rgba(236,236,236,0.88)"/></svg>
-      <div><div class="nm">SproutNet</div><div class="sub">admin panel</div></div>
+      <div><div class="nm">Solmira</div><div class="sub">admin panel</div></div>
     </a>
     <div class="admin-card admin-access">
       <div class="lbl">YOUR ACCESS</div>

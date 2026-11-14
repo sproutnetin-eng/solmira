@@ -36,3 +36,4 @@
     { "source": "/admin/payouts", "destination": "/admin-payouts.html" }
   ]
 }
+
